@@ -4,6 +4,7 @@ package CalculadoraDeDescontos;
  * CalculadoraDescontos
  */
 public class CalculadoraDescontos {
+
   public void Calculadora20()
     {
         System.out.println("=======================================");

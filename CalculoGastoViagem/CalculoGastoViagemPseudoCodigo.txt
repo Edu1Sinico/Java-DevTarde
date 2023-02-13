@@ -1,0 +1,16 @@
+Algaritmo: 
+
+• Informar a distância dos locais;
+• Informar o preço da gasolina;
+• Informar quanto o carro gasta por km;
+• Multiplicar a distância por litro.
+
+Pseudocódigo:
+
+• distanciaDosLocais = obterInformacaoDoUsuario();
+• precoGasolina = obterInformacaoDoUsuario();
+• carroGastaPorKm = obterInformacaoDoUsuario();
+• gastoDeGasolina = carroGastaPorKm/precoGasolina;
+• gastoTotal = distanciaDosLocais*gastoDeGasolina
+• exibirResultadoParaUsuario(gastoTotal);
+

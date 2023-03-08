@@ -2,8 +2,6 @@ package ExercicioIFElseJava;
 
 import java.util.Scanner;
 
-import ClasseDecisao;
-
 public class main {
     public static void main(String[] args) {
         ClasseDecisao cd = new ClasseDecisao();

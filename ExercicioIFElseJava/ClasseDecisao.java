@@ -5,6 +5,8 @@ import java.util.Scanner;
 import javax.lang.model.util.ElementScanner14;
 
 public class ClasseDecisao {
+
+//Variáveis globais
 int x = 0, y = 0, z = 0, total = 0;
 double total1;
 Scanner sc = new Scanner(System.in);
@@ -130,6 +132,7 @@ Scanner sc = new Scanner(System.in);
         }
     }
 
+    //Método do excercício 6
     public void Exercicio6(){
         System.out.println("Digite sua altura: ");
         double altura = sc.nextDouble();
@@ -149,36 +152,5 @@ Scanner sc = new Scanner(System.in);
         System.out.println("Precione um desses números.");
     }
 
-    //Exercicio7
-    public void Exercicio7(){
-        System.out.println("Informe a nota 1 do aluno: ");
-        x = sc.nextInt();
-        System.out.println("Informe a nota 2 do aluno: ");
-        y = sc.nextInt();
-        double media = (x+y)/2;
-        System.out.println("A média do aluno é: " + media);
-        if (media >= 50)
-        {
-            System.out.println("Aluno aprovado por nota.");
-        }
-        else{
-            System.out.println("Aluno reprovado por nota.");
-        }
-        System.out.println("Informe a frequência do aluno: ");
-        int freqAluno = sc.nextInt();
-        if (freqAluno >= 75)
-        {
-            System.out.println("Aluno aprovado por frequência.");
-        }
-        else{
-            System.out.println("Aluno reprovado por frequência.");
-        }
-        if (media >= 50 && freqAluno >= 75)
-        {
-            System.out.println("Aluno aprovado no curso.");
-        }
-        else{
-            System.out.println("Aluno reprovado no curso.");
-        }
-    }
+    
 }

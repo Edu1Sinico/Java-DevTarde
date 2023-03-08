@@ -152,5 +152,36 @@ Scanner sc = new Scanner(System.in);
         System.out.println("Precione um desses números.");
     }
 
-    
+    //Método do exercício7
+    public void Exercicio7(){
+        System.out.println("Informe a nota 1 do aluno: ");
+        x = sc.nextInt();
+        System.out.println("Informe a nota 2 do aluno: ");
+        y = sc.nextInt();
+        double media = (x+y)/2;
+        System.out.println("A média do aluno é: " + media);
+        if (media >= 50)
+        {
+            System.out.println("Aluno aprovado por nota.");
+        }
+        else{
+            System.out.println("Aluno reprovado por nota.");
+        }
+        System.out.println("Informe a frequência do aluno: ");
+        int freqAluno = sc.nextInt();
+        if (freqAluno >= 75)
+        {
+            System.out.println("Aluno aprovado por frequência.");
+        }
+        else{
+            System.out.println("Aluno reprovado por frequência.");
+        }
+        if (media >= 50 && freqAluno >= 75)
+        {
+            System.out.println("Aluno aprovado no curso.");
+        }
+        else{
+            System.out.println("Aluno reprovado no curso.");
+        }
+    }
 }

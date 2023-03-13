@@ -61,13 +61,13 @@ Scanner sc = new Scanner(System.in);
     //Método do exercício 4
     public void Exercicio4(){
         System.out.println("Digite a quantidade de maçãs coletadas: ");
-        double x = sc.nextInt();
+        int x = sc.nextInt();
         if (x < 12)
         {
             total1 = x*0.30;
             System.out.println("As maçãs irão custar: " + total1);
         }
-        else if (x >= 12)
+        else //if (x >= 12)
         {
             total1 = x*0.25;
             System.out.println("As maçãs irão custar: " + total1);

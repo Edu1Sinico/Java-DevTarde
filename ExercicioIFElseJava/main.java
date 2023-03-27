@@ -57,5 +57,5 @@ public class main {
             System.out.println("Deseja continuar? Precione 0, caso contrario, precione qualquer outro número.");
             continuar = sc.nextInt();
         } while (continuar == 0);
-    }
+    } 
 }

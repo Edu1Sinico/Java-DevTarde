@@ -91,6 +91,8 @@ public class Classe {
 
                     // Calculo de IMC
 
+                    double imc = peso / Math.pow(altura,2);
+                    
                     
 
                     break;

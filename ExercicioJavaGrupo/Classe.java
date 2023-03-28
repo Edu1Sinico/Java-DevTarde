@@ -93,8 +93,57 @@ public class Classe {
 
                     double imc = peso / Math.pow(altura,2);
                     
-                    
 
+                    //Nível difícil
+                    if (imc < 20 && idade >= 25 && idade <=45)
+                    {
+                        System.out.println("Você está abaixo do peso ideal, seu nível é 'Difícil' e precisa ganhar massa muscular.");
+                        System.out.println("Sua idade: " + idade);
+                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Musculação intensa;");
+                        System.out.println("Luta livre.");
+                        System.out.println("");
+                    }
+                    else if (imc < 20 && idade >= 36 && idade <= 55)
+                    {
+                        System.out.println("Você está abaixo do peso ideal, seu nível é 'Difícil' e precisa ganhar massa muscular.");
+                        System.out.println("Sua idade: " + idade);
+                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Luta livre.");
+                        System.out.println("");
+                    }
+                    else if (imc < 20 && idade >= 46)
+                    {
+                        System.out.println("Você está abaixo do peso ideal, seu nível é 'Difícil' e precisa ganhar massa muscular.");
+                        System.out.println("Sua idade: " + idade);
+                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Pilates.");
+                        System.out.println("");
+                    }
+
+                    //Nível moderado
+                    else if (imc > 20 && imc < 27 && idade >= 16 && idade <= 55)
+                    {
+                        System.out.println("Você está no seu peso ideal, seu nível é 'Moderado' e está com o peso normal.");
+                        System.out.println("Sua idade: " + idade);
+                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Dança;");
+                        System.out.println("Musculação moderada.");
+                        System.out.println("");
+                    }
+                    else if (imc > 20 && imc < 27 && idade >= 25 && idade <= 65)
+                    {
+                        System.out.println("Você está no seu peso ideal, seu nível é 'Moderado' e está com o peso normal.");
+                        System.out.println("Sua idade: " + idade);
+                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Dança;");
+                        System.out.println("Corrida.");
+                        System.out.println("");
+                    }
+
+                    //Nível leve
+                    else if ()
+                    
                     break;
                 }
 

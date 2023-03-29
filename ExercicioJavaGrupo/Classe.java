@@ -34,6 +34,7 @@ public class Classe {
             switch (receber) {
                 case 1: {
                     System.out.println();
+                    System.out.println("=============================");
                     System.out.println("---=Calculo de peso ideal=---");
                     System.out.println();
 
@@ -86,6 +87,7 @@ public class Classe {
 
                 case 2: {
                     System.out.println();
+                    System.out.println("======================");
                     System.out.println("---=Calculo de IMC=---");
                     System.out.println();
 
@@ -99,7 +101,8 @@ public class Classe {
                     {
                         System.out.println("Você está abaixo do peso ideal, seu nível é 'Difícil' e precisa ganhar massa muscular.");
                         System.out.println("Sua idade: " + idade);
-                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Você pode realizar as seguintes atividades de acordo com seu nível e faixa etária: ");
+                        System.out.println("");
                         System.out.println("Musculação intensa;");
                         System.out.println("Luta livre.");
                         System.out.println("");
@@ -108,7 +111,8 @@ public class Classe {
                     {
                         System.out.println("Você está abaixo do peso ideal, seu nível é 'Difícil' e precisa ganhar massa muscular.");
                         System.out.println("Sua idade: " + idade);
-                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Você pode realizar as seguintes atividades de acordo com seu nível e faixa etária: ");
+                        System.out.println("");
                         System.out.println("Luta livre.");
                         System.out.println("");
                     }
@@ -116,7 +120,8 @@ public class Classe {
                     {
                         System.out.println("Você está abaixo do peso ideal, seu nível é 'Difícil' e precisa ganhar massa muscular.");
                         System.out.println("Sua idade: " + idade);
-                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Você pode realizar as seguintes atividades de acordo com seu nível e faixa etária: ");
+                        System.out.println("");
                         System.out.println("Pilates.");
                         System.out.println("");
                     }
@@ -126,7 +131,8 @@ public class Classe {
                     {
                         System.out.println("Você está no seu peso ideal, seu nível é 'Moderado' e está com o peso normal.");
                         System.out.println("Sua idade: " + idade);
-                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Você pode realizar as seguintes atividades de acordo com seu nível e faixa etária: ");
+                        System.out.println("");
                         System.out.println("Dança;");
                         System.out.println("Musculação moderada.");
                         System.out.println("");
@@ -135,14 +141,29 @@ public class Classe {
                     {
                         System.out.println("Você está no seu peso ideal, seu nível é 'Moderado' e está com o peso normal.");
                         System.out.println("Sua idade: " + idade);
-                        System.out.println("Você pode realizar as seguintes atividades: ");
+                        System.out.println("Você pode realizar as seguintes atividades de acordo com seu nível e faixa etária: ");
+                        System.out.println("");
                         System.out.println("Dança;");
                         System.out.println("Corrida.");
                         System.out.println("");
                     }
 
                     //Nível leve
-                    else if ()
+                    else if (imc > 27 && idade >= 16 && idade >= 66)
+                    {
+                        System.out.println("Você está acima do peso ideal, seu nível é 'leve' e precisa perder peso.");
+                        System.out.println("Sua idade: " + idade);
+                        System.out.println("Você pode realizar as seguintes atividades de acordo com seu nível e faixa etária: ");
+                        System.out.println("");
+                        System.out.println("Musculação leve;");
+                        System.out.println("Ioga.");
+                        System.out.println("");
+                    }
+                    else
+                    {
+                        System.out.println("Você está em seu peso ideal de acordo com sua idade");
+                        System.out.println("Sua idade: " + idade);
+                    }
                     
                     break;
                 }
@@ -153,6 +174,7 @@ public class Classe {
                 }
             }
 
+            System.out.println("");
             System.out.println("Deseja continuar? Precione 0, caso contrário precione qualquer outro número.");
             x = sc.nextInt();
         } while (x == 0);

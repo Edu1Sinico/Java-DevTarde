@@ -161,7 +161,11 @@ public class Classe {
                     }
                     else
                     {
+<<<<<<< HEAD
                         System.out.println("Você está em seu peso ideal de acordo com sua idade e IMC");
+=======
+                        System.out.println("Você está em seu peso ideal de acordo com sua idade e IMC.");
+>>>>>>> a068c343a2f0bd6146847e98086e29de960269b7
                         System.out.println("Sua idade: " + idade);
                     }
                     

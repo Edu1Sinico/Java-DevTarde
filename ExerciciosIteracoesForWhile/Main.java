@@ -1,12 +1,11 @@
-package IteracaoWhile;
+package ExerciciosIteracoesForWhile;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ExemploWhile obj = new ExemploWhile();
-        ExerciciosWhile obj1 = new ExerciciosWhile();
         Scanner sc = new Scanner(System.in);
+        ExercicioIteracoes obj = new ExercicioIteracoes();
         int x = 0;
         do {
             System.out.println("");
@@ -17,6 +16,9 @@ public class Main {
             System.out.println("4º Exercicio 4;");
             System.out.println("5º Exercicio 5;");
             System.out.println("6º Exercicio 6.");
+            System.out.println("7º Exercicio 7.");
+            System.out.println("8º Exercicio 8.");
+            System.out.println("9º Exercicio 9.");
             int receber = sc.nextInt();
             System.out.println("");
             System.out.println("--------------------------------------");
@@ -24,35 +26,46 @@ public class Main {
 
             switch (receber) {
                 case 1: {
-                    obj1.Exercicio1();
+                    obj.Metodo01();
                     break;
                 }
 
                 case 2: {
-                    obj1.Exercicio2();
+                    obj.Metodo02();
                     break;
                 }
 
                 case 3: {
-                    obj1.Exercicio3();
+                    obj.Metodo03();
                     break;
                 }
 
                 case 4: {
-                    obj1.Exercicio4();
+                    obj.Metodo04();
                     break;
                 }
 
                 case 5: {
-                    obj1.Exercicio5();
+                    obj.Metodo05();
                     break;
                 }
 
                 case 6: {
-                    obj1.Exercicio6();
+                    obj.Metodo06();
                     break;
                 }
-
+                case 7: {
+                    obj.Metodo07();
+                    break;
+                }
+                case 8: {
+                    obj.Metodo08();
+                    break;
+                }
+                case 9: {
+                    obj.Metodo09();
+                    break;
+                }
 
                 default: {
                     System.out.println("Por favor, selecione uma das opções acima.");
@@ -67,13 +80,6 @@ public class Main {
             x = sc.nextInt();
         } while (x == 0);
     }
-
-      // obj.Metodo01();
-
-        // obj.Metodo02();
-
-        // obj.Metodo03();
-
-        // obj.Metodo04();
 }
-      
+    }
+}

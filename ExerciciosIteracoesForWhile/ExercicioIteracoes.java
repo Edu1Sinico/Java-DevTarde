@@ -143,6 +143,63 @@ public class ExercicioIteracoes {
         }
     }
 
+    public void Metodo05Mod() {
+        int[] vetor = new int[20];
+        int contImpar = 0, contPar = 0;
+        int[] vetorPar = new int[contPar];
+        int[] vetorImpar = new int[contImpar];
+
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.println("Informe para o vetor de índice " + (i+1) + ": ");
+            vetor[i] = sc.nextInt();
+        }
+        
+        for (int i = 0; i < vetor.length; i++) {
+            if (vetor[i] % 2 == 0) {
+                contPar++;
+            }
+            else{
+                contImpar++;
+            }
+        }
+        contImpar = 0;
+        contPar = 0;
+        for(int i = 0; i < vetor.length; i++)
+        {
+            if (vetor[i] % 2 == 0)
+            {
+                vetorPar[contPar] = vetor[i];
+                contPar++;
+            }
+            else{
+                vetorImpar[contImpar] = vetor[i];
+                contImpar++;
+            }
+            
+        }
+        System.out.println("Números que você informou: ");
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.println((i+1) + "º " + vetor[i]);
+        }
+
+        System.out.println("");
+        System.out.println("Vetor de números pares: ");
+        for (int i = 0; i < vetorPar.length; i++) {
+                System.out.println(vetorPar[i]);
+        }
+
+        System.out.println("");
+        System.out.println("Vetor de números impares: ");
+        for (int i = 0; i < vetorImpar.length; i++) {
+                System.out.println(vetorImpar[i]);
+        }
+
+
+
+        
+
+    }
+
     // -----------------------------------------------------------------------------------------
     // Método 6
     public void Metodo06() {

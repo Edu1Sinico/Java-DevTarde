@@ -41,7 +41,8 @@ public class Main {
                 }
 
                 case 4: {
-                    obj.Metodo04();
+                    // obj.Metodo04();
+                    obj.Metodo04Mod();
                     break;
                 }
 

@@ -51,7 +51,6 @@ public class ExercicioIteracoes {
         }
         media = total / 4;
         for (int i = 0; i < vetor.length; i++) {
-            j++;
             System.out.println("A " + (i+1) + "ª nota digita foi: " + vetor[i]);
         }
         System.out.println("A média será de: " + media);
@@ -86,6 +85,22 @@ public class ExercicioIteracoes {
     public static boolean Vogal(char c) {
         c = Character.toLowerCase(c);
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+
+    public void Metodo04Mod() {
+        System.out.println("Digite uma palavra: ");
+        int cont = 0;
+        String palavra = sc.next();
+        palavra.toLowerCase();
+        for (int i = 0; i < palavra.length(); i++) {
+            char c = palavra.charAt(i);
+            if (Character.isLetter(c) && c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u')
+            {
+                cont++;
+                System.out.println("Consoantes da palavra: " + c);
+            }
+        }
+        System.out.println("Total de consoantes da palavra: " + cont);
     }
 
     // -----------------------------------------------------------------------------------------

@@ -291,7 +291,20 @@ public class ForWhile {
 
     // Exercício 9
     public void Metodo09() {
-        
+        double num1 = 0, num2 = 0, total = 0;
+
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("");
+        System.out.println("Digite um base: ");
+        num1 = sc.nextDouble();
+        System.out.println("");
+        System.out.println("Digite um expoente: ");
+        num2 = sc.nextDouble();
+        System.out.println("");
+        total = Math.pow(num1, num2);
+        System.out.println("O resultado será: " + total);
+        System.out.println("");
+        System.out.println("---------------------------------------------------------------------------------------");
     }
 
     // Exercício 10

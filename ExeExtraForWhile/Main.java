@@ -12,9 +12,9 @@ public class Main {
         // obj.Metodo06();
         // obj.Metodo07();
         // obj.Metodo08();
-        obj.Metodo09();
+        // obj.Metodo09();
         // obj.Metodo10();
         // obj.Metodo11();
-        // obj.Metodo12();
+        obj.Metodo12();
     }
 }

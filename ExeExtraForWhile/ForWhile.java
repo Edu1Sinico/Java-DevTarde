@@ -291,17 +291,21 @@ public class ForWhile {
 
     // Exercício 9
     public void Metodo09() {
-        double num1 = 0, num2 = 0, total = 0;
+        int num1 = 0, num2 = 0, total = 1;
 
         System.out.println("---------------------------------------------------------------------------------------");
         System.out.println("");
         System.out.println("Digite um base: ");
-        num1 = sc.nextDouble();
+        num1 = sc.nextInt();
         System.out.println("");
         System.out.println("Digite um expoente: ");
-        num2 = sc.nextDouble();
+        num2 = sc.nextInt();
         System.out.println("");
-        total = Math.pow(num1, num2);
+        // total = Math.pow(num1, num2);
+        for (int i = 0; i < num2; i++)
+        {
+            total *= num1;
+        }
         System.out.println("O resultado será: " + total);
         System.out.println("");
         System.out.println("---------------------------------------------------------------------------------------");
@@ -309,16 +313,53 @@ public class ForWhile {
 
     // Exercício 10
     public void Metodo10() {
-
+        int num = 0, CalcFib = 0, x = 0, y = 1;
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("");
+        System.out.println("-----[Série Fibonacci]-----");
+        System.out.println("");
+        System.out.println("Informe o n-ésimo termo que você deseja que pare.");
+        num = sc.nextInt();
+        System.out.println("");
+        System.out.println("Sequência:");
+        System.out.println("");
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("");
+        for (int i = 0; i < num; i++)
+        {
+            CalcFib = x + y;
+            System.out.println((i+1) + "º Posição: " + CalcFib);
+            x = y; //O número que está em y, vai ficar armazenado em x, ex: x=0 e y=1 ---> x = y ---> x = 1.
+            y = CalcFib; //O número que está na variavel CalcFib, vai ficar armazenado em y, ex: y=1 e calcFib=n ---> y = calcFib ---> y = n. O y irá ficar com o resultado da conta, fazendo com que se tonre um ciclo.
+        }
+        System.out.println("");
+        System.out.println("---------------------------------------------------------------------------------------");
     }
 
     // Exercício 11
     public void Metodo11() {
-
+        int num = 0, total = 1;
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("");
+        System.out.println("Digite um número: ");
+        num = sc.nextInt();
+        System.out.println("");
+        for(int i = num; i > 1; i--)
+        {
+            total *= i;
+        }
+        System.out.println("Resultado da fatoração do número " + num + ": " + total + ".");
+        System.out.println("");
+        System.out.println("---------------------------------------------------------------------------------------");
     }
 
     // Exercício 12
     public void Metodo12() {
-
+        int num = 0;
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("");
+        System.out.println("Digite um número: ");
+        num = sc.nextInt();
+        System.out.println("");
     }
 }

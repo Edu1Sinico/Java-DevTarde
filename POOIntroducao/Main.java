@@ -51,5 +51,11 @@ public class Main {
         System.out.println("Média do aluno(a):" + rAluno.getMedia());
         System.out.println("");
         System.out.println("Contador: " + RegistraAluno.getQuantidadeAlunos());
+
+        // --------------------------------------------------------------------------
+
+        Alunos aluno1 = new Alunos();
+        aluno1.setNome("Alberto");
+        System.out.println(aluno1.getNome());
     }
 }

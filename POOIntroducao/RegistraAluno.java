@@ -1,8 +1,6 @@
 package POOIntroducao;
 
-public class RegistraAluno {
-    private String nome;
-    private String endereco;
+public class RegistraAluno extends Pessoas{
     private int idade;
     private double notaMatematica;
     private double notaPortugues;

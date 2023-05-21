@@ -135,6 +135,27 @@ public class ExeMatriz {
         int[][] B = new int[3][3];
         int[][] C = new int[3][3];
 
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print("Digite o " + (j + 1) + "º nº para a matriz A[" + (i + 1) + "]: ");
+                A[i][j] = sc.nextInt();
+                B[i][j] = (i+1);
+                System.out.println("");
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                C[i][j] = B[i][j]*A[i][j];
+            }
+        }
+
+        System.out.println("Matriz C: ");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.println("Matriz C[i][j] = " + C[i][j]);
+            }
+        }
 
     }
 }

@@ -4,6 +4,6 @@ public class Main {
     public static void main(String[] args) {
         ExeMatriz obj = new ExeMatriz();
 
-        obj.Metodo03();
+        obj.Metodo06();
     }
 }

@@ -245,8 +245,7 @@ public class ForWhile {
             vetor[i] = i;
             if (vetor[i] > num1 && vetor[i] < num2) {
                 System.out.println(vetor[i]);
-            }
-            else if(vetor[i] > num2 && vetor[i] < num1 ){
+            } else if (vetor[i] > num2 && vetor[i] < num1) {
                 System.out.println(vetor[i]);
             }
         }
@@ -259,8 +258,8 @@ public class ForWhile {
     // Exercício 8
     public void Metodo08() {
         int num = 0;
-        int[] vetorTab =new int[10];
-        int[] vetor =new int[10];
+        int[] vetorTab = new int[10];
+        int[] vetor = new int[10];
 
         System.out.println("---------------------------------------------------------------------------------------");
         System.out.println("");
@@ -273,17 +272,16 @@ public class ForWhile {
         System.out.println("");
 
         for (int i = 0; i < vetorTab.length; i++) {
-            vetorTab[i] = i+1;
-            vetor[i] = num*vetorTab[i];
+            vetorTab[i] = i + 1;
+            vetor[i] = num * vetorTab[i];
         }
 
         System.out.println("---------------------------------------------------------------------------------------");
         System.out.println("");
         System.out.println("Tabuada do " + num + ":");
         System.out.println("");
-        for(int i = 0; i < vetor.length; i++)
-        {
-            System.out.println((i+1) + "º Posição: " + vetor[i]);
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.println((i + 1) + "º Posição: " + vetor[i]);
         }
         System.out.println("");
         System.out.println("---------------------------------------------------------------------------------------");
@@ -302,8 +300,7 @@ public class ForWhile {
         num2 = sc.nextInt();
         System.out.println("");
         // total = Math.pow(num1, num2);
-        for (int i = 0; i < num2; i++)
-        {
+        for (int i = 0; i < num2; i++) {
             total *= num1;
         }
         System.out.println("O resultado será: " + total);
@@ -325,12 +322,14 @@ public class ForWhile {
         System.out.println("");
         System.out.println("---------------------------------------------------------------------------------------");
         System.out.println("");
-        for (int i = 0; i < num; i++)
-        {
+        for (int i = 0; i < num; i++) {
             CalcFib = x + y;
-            System.out.println((i+1) + "º Posição: " + CalcFib);
-            x = y; //O número que está em y, vai ficar armazenado em x, ex: x=0 e y=1 ---> x = y ---> x = 1.
-            y = CalcFib; //O número que está na variavel CalcFib, vai ficar armazenado em y, ex: y=1 e calcFib=n ---> y = calcFib ---> y = n. O y irá ficar com o resultado da conta, fazendo com que se tonre um ciclo.
+            System.out.println((i + 1) + "º Posição: " + CalcFib);
+            x = y; // O número que está em y, vai ficar armazenado em x, ex: x=0 e y=1 ---> x = y
+                   // ---> x = 1.
+            y = CalcFib; // O número que está na variavel CalcFib, vai ficar armazenado em y, ex: y=1 e
+                         // calcFib=n ---> y = calcFib ---> y = n. O y irá ficar com o resultado da
+                         // conta, fazendo com que se torne um ciclo.
         }
         System.out.println("");
         System.out.println("---------------------------------------------------------------------------------------");
@@ -344,8 +343,7 @@ public class ForWhile {
         System.out.println("Digite um número: ");
         num = sc.nextInt();
         System.out.println("");
-        for(int i = num; i > 1; i--)
-        {
+        for (int i = num; i > 1; i--) {
             total *= i;
         }
         System.out.println("Resultado da fatoração do número " + num + ": " + total + ".");

@@ -22,8 +22,22 @@ public class AtivFormClasse {
         int[][] matriz = new int[x][y];
 
         for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz.length; j++) {
+            for (int j = 0; j < matriz[0].length; j++) {
                 matriz[i][j] = rd.nextInt(0, 9);
+            }
+        }
+
+        System.out.println("Matriz Random: ");
+        System.out.println("");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.println("Matriz[" + (i+1) + "][" + (j+1) + "] = " + matriz[i][j]);
+                System.out.println("");
+            }
+        }
+
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
                 if (i > j) {
                     matriz[i][j] = 1;
                 } else if (i == j) {
@@ -34,10 +48,12 @@ public class AtivFormClasse {
             }
         }
 
-        System.out.println("Matriz: ");
+        System.out.println("===========================");
+        System.out.println("");
+        System.out.println("Matriz substituida: ");
         System.out.println("");
         for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz.length; j++) {
+            for (int j = 0; j < matriz[0].length; j++) {
                 System.out.println("Matriz[" + (i+1) + "][" + (j+1) + "] = " + matriz[i][j]);
                 System.out.println("");
             }

@@ -10,6 +10,7 @@ public class AtivFormClasse {
     Scanner sc = new Scanner(System.in);
     Random rd = new Random();
 
+    //Método 1
     public void Metodo01() {
         int x = 0, y = 0;
 
@@ -61,6 +62,7 @@ public class AtivFormClasse {
 
     }
 
+    //Método 2
     public void Metodo02() {
         int valorSorteado = 0, x = 0, cont = 1;
         boolean verdadeiro = false;
@@ -92,6 +94,7 @@ public class AtivFormClasse {
         }
     }
 
+    //Método 3
     public void Metodo03() {
         int[] vetor = new int[rd.nextInt(100,1000)];
         int cont = 0;

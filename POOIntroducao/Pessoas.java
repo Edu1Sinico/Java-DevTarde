@@ -1,6 +1,6 @@
 package POOIntroducao;
 
-public class Pessoas {
+public abstract class Pessoas {
     protected String nome;
     protected String endereco;
     

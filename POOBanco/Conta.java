@@ -7,16 +7,16 @@ import javax.swing.JOptionPane;
  */
 public class Conta extends Pessoa {
     public double saldo;
-    public int codigo;
+    public int codigo = 0;
     public String contaPF;
     public String contaPJ;
-    public String senha;
+    public int senha;
 
     public void criarConta() {
         JOptionPane.showMessageDialog(null,"Criação de Contas (Somente pessoas maiores de 18 podem criar uma conta).");
-        
+        setIdade(Integer.parseInt(JOptionPane.showInputDialog("Informe sua idade: ")));
 
-        if (getIdade() < 18) {
+        if (getIdade() > 18) {
             int receber = Integer.parseInt(JOptionPane
                     .showInputDialog("Escolha o tipo de conta (1 - Conta Pessoa Física; 2 - Conta Pessoa Jurídica)"));
 
@@ -24,7 +24,8 @@ public class Conta extends Pessoa {
                 case 1: {
                     JOptionPane.showMessageDialog(null, "Criação de Conta: Pessoa Física");
                     setNome(JOptionPane.showInputDialog("Informe o nome da conta: "));
-                    JOptionPane.showMessageDialog(null, "");
+                    setSenha(Integer.parseInt(JOptionPane.showInputDialog("Informe o nome da conta (Apenas 6 digitos): ")));
+                    codigo++;
                     break;
                 }
                 case 2: {
@@ -73,11 +74,11 @@ public class Conta extends Pessoa {
         this.contaPJ = contaPJ;
     }
 
-    public String getSenha() {
+    public int getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(int senha) {
         this.senha = senha;
     }
 }

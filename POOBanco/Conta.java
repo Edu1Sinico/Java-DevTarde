@@ -24,12 +24,17 @@ public class Conta extends Pessoa {
                 case 1: {
                     JOptionPane.showMessageDialog(null, "Criação de Conta: Pessoa Física");
                     setNome(JOptionPane.showInputDialog("Informe o nome da conta: "));
-                    setSenha(Integer.parseInt(JOptionPane.showInputDialog("Informe o nome da conta (Apenas 6 digitos): ")));
+                    setSenha(Integer.parseInt(JOptionPane.showInputDialog("Informe a senha da conta (Apenas 6 digitos): ")));
                     codigo++;
+                    setContaPF("Conta PF");
                     break;
                 }
                 case 2: {
-
+                    JOptionPane.showMessageDialog(null, "Criação de Conta: Pessoa Jurídica");
+                    setNome(JOptionPane.showInputDialog("Informe o nome da conta: "));
+                    setSenha(Integer.parseInt(JOptionPane.showInputDialog("Informe a senha da conta (Apenas 6 digitos): ")));
+                    codigo++;
+                    setContaPJ("Conta PJ");
                     break;
                 }
 
@@ -41,6 +46,8 @@ public class Conta extends Pessoa {
         else
         JOptionPane.showMessageDialog(null,"Somente adultos maiores de 18 anos podem criar conta!");
     }
+
+    
 
     public double getSaldo() {
         return saldo;

@@ -6,6 +6,8 @@ package POOBanco;
 public class Main {
 
     public static void main(String[] args) {
-        
+        Conta objConta = new Conta();
+
+        objConta.criarConta();
     }
 }

@@ -8,7 +8,7 @@ public class Pessoa {
     private double altura;
     private int dia, mes, ano, idade;
 
-    public void RecolherDados() {
+    public void recolherDados() {
         System.out.println("Informe o nome da pessoa: ");
         setNome(sc.nextLine());
         System.out.println("\nInforme a altura da pessoa: ");
@@ -25,12 +25,18 @@ public class Pessoa {
     public void imprimirDados() {
         System.out.println("\nNome da pessoa: " + nome);
         System.out.printf("\nAltura da pessoa: %.2f\n", altura);
-        System.out.println("\nData de nascimento: " +dia+ "/"+mes+"/"+ano);
-        System.out.println("\nSua idade é: " +calcIdade());
+        System.out.println("\nData de nascimento: " + dia + "/" + mes + "/" + ano);
+        System.out.println("\nSua idade é: " + calcIdade());
     }
 
-    public int calcIdade(){
-        idade = 2023 - ano;
+    public int calcIdade() {
+        if (dia <= 5 && mes <= 6) {
+            idade = 2023 - ano;
+        }
+        else
+        {
+            idade = 2023 - ano - 1;
+        }
         return idade;
     }
 

@@ -7,7 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Pessoa obj = new Pessoa();
 
-        obj.RecolherDados();
+        obj.recolherDados();
     
     }
 }

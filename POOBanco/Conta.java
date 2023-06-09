@@ -10,9 +10,9 @@ public class Conta extends Pessoa {
     public int codigo = 0;
     public String contaTipo;
     public int senha;
-    public double saque;
-    public double deposito;
-    public double emprestimo;
+    public double saque = 0;
+    public double deposito = 0;
+    public double emprestimo = 0;
 
     public void criarConta() {
         JOptionPane.showMessageDialog(null, "Criação de Contas (Somente pessoas maiores de 18 podem criar uma conta).");
@@ -50,8 +50,17 @@ public class Conta extends Pessoa {
             JOptionPane.showMessageDialog(null, "Somente adultos maiores de 18 anos podem criar conta!");
     }
 
+    //Método Incompleto
     public double saque(){ 
-        JOptionPane.showMessageDialog(null,);
+        JOptionPane.showMessageDialog(null,"Método de Saques");
+        int saquear = Integer.parseInt(JOptionPane.showInputDialog("Selecione a quantidade de valores para saquear (Limite: 3000):"));
+        if(saquear > 0 && saquear < 3000)
+        {
+            saque += saquear;
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Valor inválido!");
+        }
         return saque;
     }
 
@@ -85,6 +94,30 @@ public class Conta extends Pessoa {
 
     public void setSenha(int senha) {
         this.senha = senha;
+    }
+
+    public double getSaque() {
+        return saque;
+    }
+
+    public void setSaque(double saque) {
+        this.saque = saque;
+    }
+
+    public double getDeposito() {
+        return deposito;
+    }
+
+    public void setDeposito(double deposito) {
+        this.deposito = deposito;
+    }
+
+    public double getEmprestimo() {
+        return emprestimo;
+    }
+
+    public void setEmprestimo(double emprestimo) {
+        this.emprestimo = emprestimo;
     }
     
 }

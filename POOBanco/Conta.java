@@ -14,6 +14,7 @@ public class Conta extends Pessoa {
     public double deposito = 0;
     public double emprestimo = 0;
 
+    // Método Criar conta.
     public void criarConta() {
         JOptionPane.showMessageDialog(null, "Criação de Contas (Somente pessoas maiores de 18 podem criar uma conta).");
         setIdade(Integer.parseInt(JOptionPane.showInputDialog("Informe sua idade: ")));
@@ -50,19 +51,37 @@ public class Conta extends Pessoa {
             JOptionPane.showMessageDialog(null, "Somente adultos maiores de 18 anos podem criar conta!");
     }
 
-    //Método Incompleto
-    public double saque(){ 
-        JOptionPane.showMessageDialog(null,"Método de Saques");
-        int saquear = Integer.parseInt(JOptionPane.showInputDialog("Selecione a quantidade de valores para saquear (Limite: 3000):"));
-        if(saquear > 0 && saquear < 3000)
-        {
-            saque += saquear;
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Valor inválido!");
-        }
-        return saque;
+    // Método Saldo
+    public void Saldo() {
+        
     }
+
+    // Método Saque:
+    public double saque() {
+        JOptionPane.showMessageDialog(null, "Método de Saque");
+        double saquear = Double.parseDouble(
+                JOptionPane.showInputDialog("informe a quantidade de valores para saquear (Limite: 3000):"));
+        if (saquear > 0 && saquear < 3000) {
+            if (saldo > saquear) {
+                saldo = saldo - saquear;
+            } else {
+                System.out.println("não é possível fazer o saque (saldo insuficiente).");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível efetuar o saque (Valor fora do limite).");
+        }
+        return saldo;
+    }
+
+    // Método de Depósito
+    public void deposito() {
+        JOptionPane.showMessageDialog(null, "Método de Depósito");
+        double deposito = Double.parseDouble(
+                JOptionPane.showInputDialog("Informe o valor para depositar:"));
+        saldo = saldo + deposito;
+    }
+
+    // Método de empréstimo
 
     public double getSaldo() {
         return saldo;
@@ -119,5 +138,5 @@ public class Conta extends Pessoa {
     public void setEmprestimo(double emprestimo) {
         this.emprestimo = emprestimo;
     }
-    
+
 }

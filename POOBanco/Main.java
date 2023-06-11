@@ -9,7 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         Conta[] Conta = new Conta[2];
-        Conta objConta = new Conta();
         int receber, x, cont = 0;
         do {
             JOptionPane.showMessageDialog(null, "Programa do Banco");
@@ -24,9 +23,10 @@ public class Main {
                 }
                 case 2: {
                     boolean encontrar = true;
+                    JOptionPane.showMessageDialog(null, "Buscar Contas");
+                    String buscarNome = JOptionPane.showInputDialog("Informe o nome da conta para ser buscado:");
                     while (encontrar) {
-                        JOptionPane.showMessageDialog(null, "Buscar Contas");
-                        String buscarNome = JOptionPane.showInputDialog("Informe o nome da conta para ser buscado:");
+                        // Método não funcionando
                         if (buscarNome.equals(Conta[cont].getNome())) {
                             JOptionPane.showMessageDialog(null, "Nome: " + Conta[cont].getNome());
                             JOptionPane.showMessageDialog(null, "Idade: " + Conta[cont].getIdade());
@@ -34,8 +34,6 @@ public class Main {
                             JOptionPane.showMessageDialog(null, "Tipo da conta: " + Conta[cont].getContaTipo());
                             JOptionPane.showMessageDialog(null, "Saldo: " + Conta[cont].getSaldo());
                             encontrar = false;
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Nome não encontrado.");
                         }
                         cont++;
                     }

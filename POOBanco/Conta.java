@@ -89,7 +89,7 @@ public class Conta extends Pessoa {
             if (!(saldo < saquear)) {
                 saldo = saldo - saquear;
             } else {
-                System.out.println("não é possível fazer o saque (saldo insuficiente).");
+                JOptionPane.showMessageDialog("não é possível fazer o saque (saldo insuficiente).");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Não foi possível efetuar o saque (Valor fora do limite).");

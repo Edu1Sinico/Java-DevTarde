@@ -19,7 +19,7 @@ public class Conta extends Pessoa {
 
         if (getIdade() >= 18 && getIdade() <= 120) {
             int receber = Integer.parseInt(JOptionPane
-                    .showInputDialog("Escolha o tipo de conta \n1 - Conta Pessoa Física; \n2 - Conta Pessoa Jurídica)"));
+                    .showInputDialog("Escolha o tipo de conta \n1 - Conta Pessoa Física; \n2 - Conta Pessoa Jurídica"));
 
             switch (receber) {
                 case 1: {

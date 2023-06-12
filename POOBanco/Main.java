@@ -13,7 +13,7 @@ public class Main {
         do {
             JOptionPane.showMessageDialog(null, "Programa do Banco");
             receber = Integer
-                    .parseInt(JOptionPane.showInputDialog("Pressione: \n1 - Criar conta; \n2 - Buscar conta;"));
+                    .parseInt(JOptionPane.showInputDialog("Pressione: \n1 - Criar conta; \n2 - Buscar conta."));
             switch (receber) {
                 case 1: {
                     for (int i = 0; i < Conta.length; i++) {
@@ -28,7 +28,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Buscar Contas");
                     String buscarNome = JOptionPane.showInputDialog("Informe o nome da conta para ser buscado:");
                     int y = Integer.parseInt(JOptionPane.showInputDialog(
-                            "O que deseja fazer? \n(1 - Ver informações da conta) \n(2 - Acessar conta)"));
+                            "O que deseja fazer? \n1 - Ver informações da conta \n2 - Acessar conta"));
 
                     switch (y) {
                         case 1: {
@@ -75,7 +75,7 @@ public class Main {
                     break;
                 }
             }
-            x = Integer.parseInt(JOptionPane.showInputDialog("Deseja continuar? \n0 - Sim; \n1 - Não"));
+            x = Integer.parseInt(JOptionPane.showInputDialog("Deseja continuar? \n0 - Sim; \n1 - Não."));
         } while (x == 0);
     }
 }

@@ -27,7 +27,6 @@ public class Conta extends Pessoa {
                     setNome(JOptionPane.showInputDialog("Informe o nome da conta:"));
                     setSenha(Integer
                             .parseInt(JOptionPane.showInputDialog("Informe a senha da conta (Apenas 6 digitos):")));
-                    codigo++;
                     setCpf(JOptionPane.showInputDialog("Informe o seu CPF:"));
                     setContaTipo("Conta PF");
                     break;
@@ -38,7 +37,6 @@ public class Conta extends Pessoa {
                     setSenha(Integer
                             .parseInt(JOptionPane.showInputDialog("Informe a senha da conta (Apenas 6 digitos):")));
                     setCnpj(JOptionPane.showInputDialog("Informe o seu CNPJ:"));
-                    codigo++;
                     setContaTipo("Conta PJ");
                     break;
                 }
@@ -112,7 +110,7 @@ public class Conta extends Pessoa {
     public double emprestimo() {
         JOptionPane.showMessageDialog(null, "Método de emprestimo");
         double emprestimo = Double.parseDouble(
-                JOptionPane.showInputDialog("Informe o valor para o emprestimo (5% de juros):"));
+                JOptionPane.showInputDialog("Informe o valor para o emprestimo:"));
         saldo = saldo + emprestimo;
         JOptionPane.showMessageDialog(null, "Dívida a pagar: " + emprestimo);
         return saldo;

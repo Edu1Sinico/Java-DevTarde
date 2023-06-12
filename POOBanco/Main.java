@@ -19,6 +19,7 @@ public class Main {
                     for (int i = 0; i < Conta.length; i++) {
                         Conta[i] = new Conta();
                         Conta[i].criarConta();
+                        Conta[i].setCodigo(i+1);
                     }
                     break;
                 }

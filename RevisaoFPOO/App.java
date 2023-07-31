@@ -36,10 +36,12 @@ class App {
                 int acao2 = Integer.parseInt(JOptionPane.showInputDialog("1-Gato\n 2-Cachorro\n 3-Outro"));
                 if(acao2 ==1){
                     //Cadastro do Gato
+                    gatos[contGatos] = new Gato();
                     gatos[contGatos].setProprietario(JOptionPane.showInputDialog("Digite o nome do proprietário do gato:"));
                     contGatos++;
                 }else if( acao2 ==2){
                     //cadastro do Cachorro
+                    cachorros[contCachorros] = new Cachorro();
                     cachorros[contCachorros].setProprietario(JOptionPane.showInputDialog("Digite o nome do proprietário do cachorro:"));
                     contCachorros++;
                 }else if(acao2 ==3){
@@ -62,12 +64,15 @@ class App {
                             int hora = Integer.parseInt(JOptionPane.showInputDialog("Informe a hora para o agendamento (Apenas a hora):"));
                             for (int j = 0; j < agendamento.length; j++) {
                                 if(agendamento[j].getDia() != dia && agendamento[j].getMes() != mes && agendamento[j].getAno() != ano && agendamento[j].getHora() != hora){
+
                                     agendamento[contDia].setDia(dia);
                                     contDia++;
                                     agendamento[contMes].setMes(mes);
                                     contMes++;
+                                    
                                     agendamento[contAno].setAno(ano);
                                     contAno++;
+                                    
                                     agendamento[contHora].setHora(hora) ;
                                     contHora++;
                                 }

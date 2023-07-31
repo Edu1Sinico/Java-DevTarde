@@ -1,6 +1,6 @@
-package RevisaoPOO;
+package RevisaoPOO_Aprimorado;
 
-import RevisaoPOO.Cadastro.Animal;
+import RevisaoPOO_Aprimorado.Cadastro.Animal;
 
 public class Main {
 

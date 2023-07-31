@@ -1,4 +1,4 @@
-package RevisaoPOO.Cadastro;
+package RevisaoPOO_Aprimorado.Cadastro;
 
 public class Animal {
     

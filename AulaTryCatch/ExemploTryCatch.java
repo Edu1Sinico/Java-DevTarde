@@ -78,7 +78,7 @@ public class ExemploTryCatch {
                         } catch (ArithmeticException e) {
                             JOptionPane.showMessageDialog(null, "Erro - Não existe divisão por zero!");
                         } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Erro - Só é aceito números inteiros!");
+                            JOptionPane.showMessageDialog(null, "Erro!");
                         }
                     }
                     verdadeiro = true;

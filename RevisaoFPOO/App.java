@@ -58,23 +58,11 @@ class App {
                     //Agendamento de gato
                     for (int i = 0; i < gatos.length; i++) {
                         if(gatos[i].getProprietario().equals(proprietario)){
-                            int dia = Integer.parseInt(JOptionPane.showInputDialog("Informe o dia para o agendamento (Apenas números):"));
-                            int mes = Integer.parseInt(JOptionPane.showInputDialog("Informe o mês para o agendamento (Apenas números):"));
-                            int ano = Integer.parseInt(JOptionPane.showInputDialog("Informe o ano para o agendamento (Apenas números):"));
-                            int hora = Integer.parseInt(JOptionPane.showInputDialog("Informe a hora para o agendamento (Apenas a hora):"));
+                            String data = JOptionPane.showInputDialog(null,"Informe a data do agendamento (Seguindo o padrão dd/mm/yyyy):");
+                            String hora = JOptionPane.showInputDialog(null,"Informe a hora do agendamento:");
                             for (int j = 0; j < agendamento.length; j++) {
-                                if(agendamento[j].getDia() != dia && agendamento[j].getMes() != mes && agendamento[j].getAno() != ano && agendamento[j].getHora() != hora){
-
-                                    agendamento[contDia].setDia(dia);
-                                    contDia++;
-                                    agendamento[contMes].setMes(mes);
-                                    contMes++;
-                                    
-                                    agendamento[contAno].setAno(ano);
-                                    contAno++;
-                                    
-                                    agendamento[contHora].setHora(hora) ;
-                                    contHora++;
+                                if(agendamento[j].getDataHora().equals(data + hora)){
+                                    JOptionPane.showMessageDialog(null,"Agendamento realizado com sucesso!");
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null, "Já existe agendamento nessa data e hora!");

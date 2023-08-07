@@ -1,15 +1,14 @@
 package AulaTryCatch;
 
 import javax.swing.JOptionPane;
-import java.io.*;
 
 public class ExemploTryCatch {
     public static void main(String[] args) {
-        double n1 = 0, n2 = 0; 
-        int escolha = 0, x = 0;
+        int escolha = 0, x = 0, n1 = 0, n2 = 0; ;
         boolean verdadeiro = true;
 
         do {
+            // JOptionPane.showMessageDialog(null,"O valor é :"+ a );
 
             escolha = Integer.parseInt(JOptionPane.showInputDialog("Calculadora de Operações\n\n"
                     + "1 - Adição;\n"
@@ -41,7 +40,7 @@ public class ExemploTryCatch {
                             n1 = Integer.parseInt(JOptionPane.showInputDialog("Digite o primeiro número:"));
                             n2 = Integer.parseInt(JOptionPane.showInputDialog("Digite o Segundo número:"));
                             JOptionPane.showMessageDialog(null,
-                                    "A soma do número " + n1 + " com o número " + n2 + " é igual a:\n " + (n1 - n2));
+                                    "A subtração do número " + n1 + " com o número " + n2 + " é igual a:\n " + (n1 - n2));
                             verdadeiro = false;
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, "Erro - Só é aceito números inteiros!");
@@ -57,7 +56,7 @@ public class ExemploTryCatch {
                             n1 = Integer.parseInt(JOptionPane.showInputDialog("Digite o primeiro número:"));
                             n2 = Integer.parseInt(JOptionPane.showInputDialog("Digite o Segundo número:"));
                             JOptionPane.showMessageDialog(null,
-                                    "A soma do número " + n1 + " com o número " + n2 + " é igual a:\n " + (n1 * n2));
+                                    "A multiplicação do número " + n1 + " com o número " + n2 + " é igual a:\n " + (n1 * n2));
                             verdadeiro = false;
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, "Erro - Só é aceito números inteiros!");
@@ -73,7 +72,7 @@ public class ExemploTryCatch {
                             n1 = Integer.parseInt(JOptionPane.showInputDialog("Digite o primeiro número:"));
                             n2 = Integer.parseInt(JOptionPane.showInputDialog("Digite o Segundo número:"));
                             JOptionPane.showMessageDialog(null,
-                                    "A soma do número " + n1 + " com o número " + n2 + " é igual a:\n " + (n1 / n2));
+                                    "A divisão do número " + n1 + " com o número " + n2 + " é igual a:\n " + (n1 / n2));
                             verdadeiro = false;
                         } catch (ArithmeticException e) {
                             JOptionPane.showMessageDialog(null, "Erro - Não existe divisão por zero!");

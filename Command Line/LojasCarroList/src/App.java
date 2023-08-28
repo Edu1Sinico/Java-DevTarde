@@ -34,12 +34,12 @@ public class App {
                 }
 
                 case 2: {
-                    String nome = JOptionPane.showInputDialog("Informe o nome do modelo do carro para buscar:").toLowerCase();
-                    for (Carros i: listaCarros) {
-                        if(i.getModelo().startsWith(nome)){
-                            objCarro.exibirCarro();
-                        }
-                    }
+                    // String nome = JOptionPane.showInputDialog("Informe o nome do modelo do carro para buscar:").toLowerCase();
+                    // for (Carros i: listaCarros) {
+                    //     if(i.getModelo().startsWith(nome)){
+                    //         objCarro.exibirCarro();
+                    //     }
+                    // }
                     break;
                 }
 

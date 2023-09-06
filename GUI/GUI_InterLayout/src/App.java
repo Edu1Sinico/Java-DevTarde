@@ -3,6 +3,7 @@ public class App {
         // new ExeFlowLayout();
         // new ExeGridLayout();
         // new ExercicioGridLayout();
-        new ExeBorderLayout();
+        // new ExeBorderLayout();
+        new ExercicioCalculadora();
     }
 }

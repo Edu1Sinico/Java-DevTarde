@@ -1,9 +1,8 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
-public class CardsLayout extends JFrame {
-
+public class CardLayoutExemplo {
     JPanel cards;
     private String buttonPanel = "Card com JButtons";
     private String textPanel = "Card com JTextField";
@@ -27,7 +26,7 @@ public class CardsLayout extends JFrame {
         cards.add(card2, textPanel);
         jframe.add(jpanel1, BorderLayout.PAGE_START);
         jframe.add(cards, BorderLayout.CENTER);
-        jframe.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setBounds(100, 100, 300, 300);
         jframe.setVisible(true);
         Handler handler = new Handler();

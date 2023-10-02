@@ -1,12 +1,10 @@
 import javax.swing.*;
 
-import org.w3c.dom.Text;
-
 import java.awt.*;
 
-public class Exercicio2CardLayout extends JFrame {
+public class Exercicio3CardLayout extends JFrame {
 
-    public Exercicio2CardLayout() {
+    public Exercicio3CardLayout() {
         super("Exercicio 3 - lista Cards & Tabs");
 
         // Criação de um painel principal com Card Layout

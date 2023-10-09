@@ -13,8 +13,6 @@ public class Exercicio5CardLayout extends JFrame {
         mainPanel.setLayout(cl);
         EmptyBorder bordaBotao = new EmptyBorder(5, 20, 5, 20);
 
-
-        
         // Criação de cards e declarando layouts para eles
         JPanel cardMain = new JPanel(new BorderLayout());
         JPanel cardQuiz1 = new JPanel(new BorderLayout());
@@ -23,8 +21,6 @@ public class Exercicio5CardLayout extends JFrame {
         JPanel cardQuiz4 = new JPanel(new BorderLayout());
         JPanel cardQuiz5 = new JPanel(new BorderLayout());
         JPanel cardResults = new JPanel(new BorderLayout());
-
-
 
         // Decorando a tela de inicio
         // Criando os JPanels
@@ -45,8 +41,6 @@ public class Exercicio5CardLayout extends JFrame {
         centerMainJPanel.add(bottomSubJPanel, BorderLayout.SOUTH);
         cardMain.add(centerMainJPanel, BorderLayout.CENTER);
 
-
-        
         // Decorando a página quiz 1
         JPanel centerQuiz1JPanel = new JPanel(new BorderLayout());
         JPanel topQuiz1SubJPanel = new JPanel();
@@ -83,8 +77,6 @@ public class Exercicio5CardLayout extends JFrame {
         centerQuiz1JPanel.add(centerQuiz1SubJPanel, BorderLayout.CENTER);
         centerQuiz1JPanel.add(bottomQuiz1SubJPanel, BorderLayout.SOUTH);
         cardQuiz1.add(centerQuiz1JPanel);
-
-
 
         // Decorando a página quiz 2
         JPanel centerQuiz2JPanel = new JPanel(new BorderLayout());
@@ -123,8 +115,6 @@ public class Exercicio5CardLayout extends JFrame {
         centerQuiz2JPanel.add(bottomQuiz2SubJPanel, BorderLayout.SOUTH);
         cardQuiz2.add(centerQuiz2JPanel);
 
-
-
         // Decorando a página quiz 3
         JPanel centerQuiz3JPanel = new JPanel(new BorderLayout());
         JPanel topQuiz3SubJPanel = new JPanel();
@@ -161,8 +151,6 @@ public class Exercicio5CardLayout extends JFrame {
         centerQuiz3JPanel.add(centerQuiz3SubJPanel, BorderLayout.CENTER);
         centerQuiz3JPanel.add(bottomQuiz3SubJPanel, BorderLayout.SOUTH);
         cardQuiz3.add(centerQuiz3JPanel);
-
-
 
         // Decorando a página quiz 4
         JPanel centerQuiz4JPanel = new JPanel(new BorderLayout());
@@ -201,7 +189,6 @@ public class Exercicio5CardLayout extends JFrame {
         centerQuiz4JPanel.add(bottomQuiz4SubJPanel, BorderLayout.SOUTH);
         cardQuiz4.add(centerQuiz4JPanel);
 
-
         // Decorando a página quiz 5
         JPanel centerQuiz5JPanel = new JPanel(new BorderLayout());
         JPanel topQuiz5SubJPanel = new JPanel();
@@ -239,7 +226,12 @@ public class Exercicio5CardLayout extends JFrame {
         centerQuiz5JPanel.add(bottomQuiz5SubJPanel, BorderLayout.SOUTH);
         cardQuiz5.add(centerQuiz5JPanel);
 
-
+        // Decorando a página de Resultados
+        JPanel centerResultsJPanel = new JPanel(new BorderLayout());
+        JPanel centerResultsSubJPanel = new JPanel();
+        centerResultsSubJPanel.add(new JLabel("Você acertou " + cont + "/5 questões."));
+        centerResultsJPanel.add(centerResultsSubJPanel, BorderLayout.CENTER);
+        cardResults.add(centerResultsJPanel);
 
         // Adicionando os painéis para o painel principal
         mainPanel.add(cardMain);
@@ -250,16 +242,12 @@ public class Exercicio5CardLayout extends JFrame {
         mainPanel.add(cardQuiz5);
         mainPanel.add(cardResults);
 
-
-
         // Set do Frame
         this.add(mainPanel);
         this.setDefaultCloseOperation(2);
         this.setBounds(100, 100, 300, 300);
         this.pack();
         this.setVisible(true);
-
-
 
         // Ações ao botões:
         btnStart.addActionListener(e -> {
@@ -269,8 +257,8 @@ public class Exercicio5CardLayout extends JFrame {
         // seleção dos radios buttons para a questão 1
         btnNextQuiz1.addActionListener(e -> {
             if (btn1Quiz1.isSelected()) {
-                cl.next(mainPanel);
                 cont++;
+                cl.next(mainPanel);
             } else if (btn1Quiz2.isSelected()) {
                 cl.next(mainPanel);
             } else if (btn1Quiz3.isSelected()) {
@@ -289,8 +277,8 @@ public class Exercicio5CardLayout extends JFrame {
             } else if (btn2Quiz2.isSelected()) {
                 cl.next(mainPanel);
             } else if (btn2Quiz3.isSelected()) {
-                cl.next(mainPanel);
                 cont++;
+                cl.next(mainPanel);
             } else if (btn2Quiz4.isSelected()) {
                 cl.next(mainPanel);
             } else {
@@ -301,14 +289,12 @@ public class Exercicio5CardLayout extends JFrame {
         // seleção dos radios buttons para a questão 3
         btnNextQuiz3.addActionListener(e -> {
             if (btn3Quiz1.isSelected()) {
-             cl.next(mainPanel);
-
-            } else if (btn3Quiz2.isSelected()) {
                 cl.next(mainPanel);
+            } else if (btn3Quiz2.isSelected()) {
                 cont++;
+                cl.next(mainPanel);
             } else if (btn3Quiz3.isSelected()) {
                 cl.next(mainPanel);
-
             } else if (btn3Quiz4.isSelected()) {
                 cl.next(mainPanel);
             } else {
@@ -319,14 +305,12 @@ public class Exercicio5CardLayout extends JFrame {
         // seleção dos radios buttons para a questão 4
         btnNextQuiz4.addActionListener(e -> {
             if (btn4Quiz1.isSelected()) {
-             cl.next(mainPanel);
-
-            } else if (btn4Quiz2.isSelected()) {
                 cl.next(mainPanel);
+            } else if (btn4Quiz2.isSelected()) {
                 cont++;
+                cl.next(mainPanel);
             } else if (btn4Quiz3.isSelected()) {
                 cl.next(mainPanel);
-
             } else if (btn4Quiz4.isSelected()) {
                 cl.next(mainPanel);
             } else {
@@ -337,19 +321,16 @@ public class Exercicio5CardLayout extends JFrame {
         // seleção dos radios buttons para a questão 5
         btnNextQuiz5.addActionListener(e -> {
             if (btn5Quiz1.isSelected()) {
-             cl.next(mainPanel);
-
+                cl.next(mainPanel);
             } else if (btn5Quiz2.isSelected()) {
                 cl.next(mainPanel);
             } else if (btn5Quiz3.isSelected()) {
                 cl.next(mainPanel);
-
             } else if (btn5Quiz4.isSelected()) {
-                cl.next(mainPanel);
                 cont++;
+                cl.next(mainPanel);
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione uma das Opções!");
-
             }
         });
     }

@@ -1,15 +1,21 @@
+
+// Importações
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.dnd.*;
+import java.awt.datatransfer.*;
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Criação do JFrame
 
 public class TodoList extends JFrame {
 
+    // Atributos
     ImageIcon imagem = new ImageIcon(getClass().getResource("resource/iconLixeira.png"));
     public JLabel lIconLixeira = new JLabel(imagem);
-
-    // Atributos
     private JPanel mainPanel;
     private JTextField taskInputField;
     private JButton addButton;
@@ -17,21 +23,30 @@ public class TodoList extends JFrame {
     private DefaultListModel<String> listModel;
     private JButton deleteButton;
     private JButton markDoneButton;
+    private JButton unmarkDoneButton;
+    private JButton aboutButton;
     private JComboBox<String> filterComboBox;
     private JButton clearCompletedButton;
 
     private List<Task> tasks;
+    private int cont = 0;
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Construtor
 
     public TodoList() {
         // Configuração da janela principal
         super("To-Do List App");
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setSize(460, 300);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Faz nada ao tentar fechar o programa
+        this.setSize(465, 350);
 
-        this.addWindowListener(new WindowAdapter() {
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Evento de WindowListener
+
+        this.addWindowListener(new WindowAdapter() { // Adiciona o ouvinte para o JFrame
             @Override
-            public void windowClosing(WindowEvent e) {
-                close();
+            public void windowClosing(WindowEvent e) { // Cria o evento de fechar
+                close(); // Chama o método de fechar o programa
             }
         });
 
@@ -44,14 +59,19 @@ public class TodoList extends JFrame {
         taskList = new JList<>(listModel);
 
         // Inicializa campos de entrada, botões e JComboBox
-        taskInputField = new JTextField();
+        taskInputField = new JTextField(30);
+        taskInputField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Adicionando tarefa pelo "ENTER"
+
         addButton = new JButton("Adicionar");
 
-        // Adcionar Tarefa pelo ENTER
-        taskInputField.addKeyListener(new KeyListener() {
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    addTask();
+        taskInputField.addKeyListener(new KeyListener() { // Adicioando o ouvinte de keyListener diretamente para o
+                                                          // textField
+            public void keyTyped(KeyEvent e) { // Declarando o evento de KeyTyped (Quando a tecla é clicada)
+                if (e.getKeyChar() == KeyEvent.VK_ENTER) { // Adicionando um leitor que possui um mapa da tecla "Enter".
+                    addTask(); // Chama o método adicionar task
                 }
             }
 
@@ -64,13 +84,18 @@ public class TodoList extends JFrame {
             }
         });
 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Exclusão de tarefa pela tecla "DELETE"
+
         deleteButton = new JButton("Excluir");
 
         taskList.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                    deleteBtnMessage();
+                if (taskList.getSelectedIndex() >= 0) { // Verifica se se o índice da lista está selecionado
+                    if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                        deleteTask(); // Chama o evento de deletar com a mensagem.
+                    }
                 }
             }
 
@@ -83,6 +108,8 @@ public class TodoList extends JFrame {
             }
         });
 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
         markDoneButton = new JButton("Concluir");
 
         markDoneButton.addActionListener(new ActionListener() {
@@ -94,6 +121,8 @@ public class TodoList extends JFrame {
         filterComboBox = new JComboBox<>(new String[] { "Todas", "Ativas",
                 "Concluídas" });
 
+        filterComboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
         // filtrar tarefas pelo combo box
         filterComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -102,44 +131,135 @@ public class TodoList extends JFrame {
         });
 
         clearCompletedButton = new JButton("Limpar Concluídas");
+        unmarkDoneButton = new JButton("Desmarcar Tarefa Concluída");
+        aboutButton = new JButton("Sobre");
+
         // Configuração do painel de entrada
-        JPanel inputPanel = new JPanel(new BorderLayout());
-        inputPanel.add(taskInputField, BorderLayout.CENTER);
-        inputPanel.add(addButton, BorderLayout.EAST);
+        JPanel inputPanel = new JPanel();
+        JPanel inputTop = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        inputTop.add(taskInputField);
+        inputTop.add(addButton);
+        inputPanel.add(inputTop);
+
+        // Adicionando um painel para a parte south do programa
+        JPanel bottomPanel = new JPanel(new GridLayout(2, 1));
+
         // Configuração do painel de botões
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonPanel.add(deleteButton);
         buttonPanel.add(markDoneButton);
         buttonPanel.add(filterComboBox);
         buttonPanel.add(clearCompletedButton);
+
+        // Configurando um segundo painel de botões
+        JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel2.add(unmarkDoneButton);
+        buttonPanel2.add(aboutButton);
+
+        // Adicionando o buttonPanel e buttonPanel2 para o bottomPanel
+        bottomPanel.add(buttonPanel);
+        bottomPanel.add(buttonPanel2);
         // Adiciona os componentes ao painel principal
         mainPanel.add(inputPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(taskList), BorderLayout.CENTER);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         buttonPanel.add(lIconLixeira);
         // Adiciona o painel principal à janela
         this.add(mainPanel);
         // Configuração de Listener para os Eventos
 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Crie uma instância dos Handlers
+
         DeleteClick dltClick = new DeleteClick();
         AddClick addClick = new AddClick();
-        ClearCheckClick ClearClick = new ClearCheckClick();
+        ClearCheckClick clearClick = new ClearCheckClick();
+        UnmarkTaskClick unmarkClick = new UnmarkTaskClick();
+        AboutClick abtClick = new AboutClick();
 
         // Adicione o Handler como ouvinte de ação para o botão 'ok'
         deleteButton.addMouseListener(dltClick);
         addButton.addMouseListener(addClick);
-        clearCompletedButton.addMouseListener(ClearClick);
+        clearCompletedButton.addMouseListener(clearClick);
+        unmarkDoneButton.addMouseListener(unmarkClick);
+        aboutButton.addMouseListener(abtClick);
+
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Eventos com drag'n'drop
+
+        // Evento de arrastar:
+        // Define a fonte de arrastar
+        DragSource dragText = DragSource.getDefaultDragSource(); // Declaração no qual o componente será arrastado,
+                                                                 // nesse
+                                                                 // caso, será o texto da lista.
+        DragGestureRecognizer arrastar = dragText.createDefaultDragGestureRecognizer( // Declaração da função de
+                                                                                      // arrastar o
+                                                                                      // objeto, sendo ele o componente
+                                                                                      // "TaskList", que é um JList
+                                                                                      // declarado anteriormente.
+
+                taskList, // Escolhendo o componente que será arrastado.
+                DnDConstants.ACTION_COPY, // Está função significa que você está copiando o objeto arrastado ao invés de
+                                          // movelo. Caso eu deseja mover, eu posso utilizar a ação: "ACTION_MOVE".
+
+                new DragGestureListener() { // Ouvinete que implementa o método "dragGesturesRecognized", ele é acionado
+                                            // quando você está arrastando o objeto for reconhecido.
+
+                    public void dragGestureRecognized(DragGestureEvent e) {
+                        // Obtém o índice do item selecionado na lista
+                        int selectedIndex = taskList.getSelectedIndex();
+                        if (selectedIndex >= 0) {
+                            String ItemSelecionado = listModel.getElementAt(selectedIndex); // Armazena em uma String a
+                                                                                            // posição do item
+                                                                                            // selecionado
+                            Transferable transferencia = new StringSelection(ItemSelecionado); // Atribuindo a um objeto
+                                                                                               // o
+                                                                                               // "Transferable",
+                                                                                               // elemento
+                                                                                               // este que permite a
+                                                                                               // tranferêcia de dados
+                            e.startDrag(DragSource.DefaultCopyDrop, transferencia, new DragSourceAdapter() {
+                            });
+                        }
+                    }
+                });
+
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Define o alvo de soltar para o icone de lixeira
+        DropTarget dropAlvo = new DropTarget(
+                lIconLixeira, // Definindo o componente onde pode ser arrastado
+                DnDConstants.ACTION_COPY, // especifica que a ação de cópia é permitida quando o item é solto.
+                new DropTargetAdapter() { // No "DropTargetAdapter", você implementa o método "drop", que é chamado
+                                          // quando o item é solto.
+                    public void drop(DropTargetDropEvent event) {
+                        Transferable tr = event.getTransferable(); // Dentro deste método, você verifica se o
+                                                                   // Transferable contém dados com o formato
+                                                                   // DataFlavor.stringFlavor. Se contiver, você
+                                                                   // chama deleteTask() para executar a
+                                                                   // lógica de exclusão da mensagem (ou tarefa)
+                                                                   // associada ao item arrastado. Se o formato não
+                                                                   // for suportado, o evento é rejeitado.
+                        if (tr.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                            deleteTask();
+                            event.dropComplete(true);
+                        } else {
+                            event.rejectDrop();
+                        }
+                    }
+                });
+
     }
 
-    // Criação de Listas e eventos
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // Criação do método de adicionar lista.
     private void addTask() {
         // Adiciona uma nova task à lista de tasks
         String taskDescription = taskInputField.getText().trim();// remove espaços vazios
+        cont++;
         if (!taskDescription.isEmpty()) {
-            Task newTask = new Task(taskDescription);
+            Task newTask = new Task(cont + ". " + taskDescription);
             tasks.add(newTask);
             updateTaskList();
             taskInputField.setText("");
@@ -147,11 +267,17 @@ public class TodoList extends JFrame {
     }
 
     private void deleteTask() {
-        // Exclui a task selecionada da lista de tasks
-        int selectedIndex = taskList.getSelectedIndex();
-        if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
-            tasks.remove(selectedIndex);
-            updateTaskList();
+        if (JOptionPane.showConfirmDialog(null, "Deseja excluir está tarefa?", // Um showConfirmDialog para confirmar se
+                                                                               // a pessoa realmente quer excluir a
+                                                                               // tarefa.
+                "Exclui", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+            // Exclui a task selecionada da lista de tasks
+            int selectedIndex = taskList.getSelectedIndex();
+            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+                tasks.remove(selectedIndex);
+                updateTaskList();
+            }
         }
     }
 
@@ -162,6 +288,19 @@ public class TodoList extends JFrame {
             Task task = tasks.get(selectedIndex);
             task.setDone(true);
             updateTaskList();
+        }
+    }
+
+    private void unmarkTaskDone() {
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente desmarcar a tarefa concluída?",
+                "Desmarcar tarefa", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // Desfaz a marcação da task selecionada
+            int selectedIndex = taskList.getSelectedIndex();
+            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+                Task task = tasks.get(selectedIndex);
+                task.setDone(false);
+                updateTaskList();
+            }
         }
     }
 
@@ -197,13 +336,15 @@ public class TodoList extends JFrame {
         }
     }
 
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Criação de Handlers para receberem o eventos de MouseListener
+
     // Handler de MouseListener para os botões
     public class DeleteClick implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            deleteBtnMessage();
-
+            deleteTask();
         }
 
         @Override
@@ -278,29 +419,85 @@ public class TodoList extends JFrame {
 
     }
 
-    // Método
+    public class UnmarkTaskClick implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            for (Task task : tasks) {
+                if (taskList.getSelectedIndex() >= 0 && task.isDone())
+                    unmarkTaskDone();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+    }
+
+    public class AboutClick implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            aboutPage();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Outros métodos simples
+
+    // Método de rodar o programa
     public void run() {
         // Exibe a janela
         this.setVisible(true);
     }
 
-    // Método de fechar
+    // Método de exibir uma mensagem ao fechar programa
     public void close() {
-        if (JOptionPane.showConfirmDialog(null, "Você deseja sair?",
+        if (JOptionPane.showConfirmDialog(null, "Deseja sair do programa?",
                 "Sair", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Obrigado por utilizar o meu programa!", "Agradecimentos",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Obrigado por utilizar nosso programa!");
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         }
 
     }
 
-    // Método de exibir um ShowConfirmDialog
-    public void deleteBtnMessage() {
-        if (JOptionPane.showConfirmDialog(null, "Deseja Excluir Essa Tarefa?",
-                "Exclui", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            deleteTask();
-        }
+    public void aboutPage() {
+        JOptionPane.showMessageDialog(null, "Sobre o Programa:\n\n"
+                + "Version: 0.1\n"
+                + "Java JDK 18\n\n"
+                + "Professor: Diogo Takamori\n"
+                + "Colaboradores: Ezequiel e Eduardo\n\n"
+                + "2023 ©Copyright", "Sobre o Programa", JOptionPane.INFORMATION_MESSAGE);
     }
-
 }

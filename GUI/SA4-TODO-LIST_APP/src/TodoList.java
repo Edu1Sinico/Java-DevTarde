@@ -1,19 +1,51 @@
 
 // Importações
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragGestureRecognizer;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceAdapter;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.dnd.*;
-import java.awt.datatransfer.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Criação do JFrame
 
 public class TodoList extends JFrame {
 
-    // Atributos
+    // Componentes e Atributos
     ImageIcon imagem = new ImageIcon(getClass().getResource("resource/iconLixeira.png"));
     public JLabel lIconLixeira = new JLabel(imagem);
     private JPanel mainPanel;
@@ -27,12 +59,12 @@ public class TodoList extends JFrame {
     private JButton aboutButton;
     private JComboBox<String> filterComboBox;
     private JButton clearCompletedButton;
-
     private List<Task> tasks;
     private int cont = 0;
-    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // Construtor
 
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Construtor
     public TodoList() {
         // Configuração da janela principal
         super("To-Do List App");
@@ -41,14 +73,6 @@ public class TodoList extends JFrame {
         this.setSize(465, 350);
 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // Evento de WindowListener
-
-        this.addWindowListener(new WindowAdapter() { // Adiciona o ouvinte para o JFrame
-            @Override
-            public void windowClosing(WindowEvent e) { // Cria o evento de fechar
-                close(); // Chama o método de fechar o programa
-            }
-        });
 
         // Inicializa o painel principal
         mainPanel = new JPanel();
@@ -58,81 +82,28 @@ public class TodoList extends JFrame {
         listModel = new DefaultListModel<>();
         taskList = new JList<>(listModel);
 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Inicializa campos de entrada, botões e JComboBox
         // Inicializa campos de entrada, botões e JComboBox
         taskInputField = new JTextField(30);
         taskInputField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // Adicionando tarefa pelo "ENTER"
-
         addButton = new JButton("Adicionar");
-
-        taskInputField.addKeyListener(new KeyListener() { // Adicioando o ouvinte de keyListener diretamente para o
-                                                          // textField
-            public void keyTyped(KeyEvent e) { // Declarando o evento de KeyTyped (Quando a tecla é clicada)
-                if (e.getKeyChar() == KeyEvent.VK_ENTER) { // Adicionando um leitor que possui um mapa da tecla "Enter".
-                    addTask(); // Chama o método adicionar task
-                }
-            }
-
-            public void keyPressed(KeyEvent e) {
-                // Implemente o que você deseja fazer quando uma tecla é pressionada.
-            }
-
-            public void keyReleased(KeyEvent e) {
-                // Implemente o que você deseja fazer quando uma tecla é liberada.
-            }
-        });
-
-        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // Exclusão de tarefa pela tecla "DELETE"
-
+        addButton.setBackground(Color.GREEN);
         deleteButton = new JButton("Excluir");
-
-        taskList.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (taskList.getSelectedIndex() >= 0) { // Verifica se se o índice da lista está selecionado
-                    if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-                        deleteTask(); // Chama o evento de deletar com a mensagem.
-                    }
-                }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
-
-        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        deleteButton.setBackground(Color.RED);
         markDoneButton = new JButton("Concluir");
-
-        markDoneButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                markTaskDone();
-            }
-        });
-
-        filterComboBox = new JComboBox<>(new String[] { "Todas", "Ativas",
-                "Concluídas" });
-
+        markDoneButton.setBackground(Color.GREEN);
+        filterComboBox = new JComboBox<>(new String[] { "Todas", "Ativas", "Concluídas" });
         filterComboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-        // filtrar tarefas pelo combo box
-        filterComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                filterTasks();
-            }
-        });
-
+        filterComboBox.setBackground(Color.WHITE);
         clearCompletedButton = new JButton("Limpar Concluídas");
+        clearCompletedButton.setBackground(Color.WHITE);
         unmarkDoneButton = new JButton("Desmarcar Tarefa Concluída");
+        unmarkDoneButton.setBackground(Color.WHITE);
         aboutButton = new JButton("Sobre");
+        aboutButton.setBackground(Color.BLUE);
+        aboutButton.setForeground(Color.WHITE);
 
         // Configuração do painel de entrada
         JPanel inputPanel = new JPanel();
@@ -169,27 +140,14 @@ public class TodoList extends JFrame {
         // Configuração de Listener para os Eventos
 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // Crie uma instância dos Handlers
 
-        DeleteClick dltClick = new DeleteClick();
-        AddClick addClick = new AddClick();
-        ClearCheckClick clearClick = new ClearCheckClick();
-        UnmarkTaskClick unmarkClick = new UnmarkTaskClick();
-        AboutClick abtClick = new AboutClick();
+        // Tratamento de Eventos
 
-        // Adicione o Handler como ouvinte de ação para o botão 'ok'
-        deleteButton.addMouseListener(dltClick);
-        addButton.addMouseListener(addClick);
-        clearCompletedButton.addMouseListener(clearClick);
-        unmarkDoneButton.addMouseListener(unmarkClick);
-        aboutButton.addMouseListener(abtClick);
-
-        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Eventos com drag'n'drop
 
         // Evento de arrastar:
         // Define a fonte de arrastar
-        DragSource dragText = DragSource.getDefaultDragSource(); // Declaração no qual o componente será arrastado,
+        DragSource dragText =   DragSource.getDefaultDragSource(); // Declaração no qual o componente será arrastado,
                                                                  // nesse
                                                                  // caso, será o texto da lista.
         DragGestureRecognizer arrastar = dragText.createDefaultDragGestureRecognizer( // Declaração da função de
@@ -249,102 +207,100 @@ public class TodoList extends JFrame {
                     }
                 });
 
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Evento de WindowListener
+        this.addWindowListener(new WindowAdapter() { // Adiciona o ouvinte para o JFrame
+            @Override
+            public void windowClosing(WindowEvent e) { // Cria o evento de fechar
+                close(); // Chama o método de fechar o programa
+            }
+        });
+
+        // Eventos de Teclado
+        // Adicionando tarefa pelo "ENTER"
+
+        taskInputField.addKeyListener(new KeyListener() { // Adicioando o ouvinte de keyListener diretamente para o
+                                                          // textField
+            public void keyTyped(KeyEvent e) { // Decndo o evento de KeyTyped (Quando a tecla é clicada)
+                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                    addTask();
+                }
+            }
+
+            public void keyPressed(KeyEvent e) {
+                // Implemente o que você deseja fazer quando uma tecla é pressionada.
+            }
+
+            public void keyReleased(KeyEvent e) {
+                // Implemente o que você deseja fazer quando uma tecla é liberada.
+            }
+        });
+
+        // Botão para exclusão
+        taskList.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (taskList.getSelectedIndex() >= 0) { // Verifica se se o índice da lista está selecionado
+                    if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+                        deleteTask(); // Chama o evento de deletar com a mensagem.
+                    }
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
+        // Botão para marcar tarefa concluida
+        markDoneButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                markTaskDone();
+            }
+        });
+
+        // filtrar tarefas pelo combo box
+        filterComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterTasks();
+            }
+        });
+
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Criando Instâncias dos Handlers
+        DeleteClick dltClick = new DeleteClick();
+        AddClick addClick = new AddClick();
+        ClearCheckClick clearClick = new ClearCheckClick();
+        UnmarkTaskClick unmarkClick = new UnmarkTaskClick();
+        AboutClick abtClick = new AboutClick();
+
+        // Adicionando o Handler como ouvinte de ação patra os Botões
+        deleteButton.addMouseListener(dltClick);
+        addButton.addMouseListener(addClick);
+        clearCompletedButton.addMouseListener(clearClick);
+        unmarkDoneButton.addMouseListener(unmarkClick);
+        aboutButton.addMouseListener(abtClick);
     }
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // Criação do método de adicionar lista.
-    private void addTask() {
-        // Adiciona uma nova task à lista de tasks
-        String taskDescription = taskInputField.getText().trim();// remove espaços vazios
-        cont++;
-        if (!taskDescription.isEmpty()) {
-            Task newTask = new Task(cont + ". " + taskDescription);
-            tasks.add(newTask);
-            updateTaskList();
-            taskInputField.setText("");
-        }
-    }
-
-    private void deleteTask() {
-        if (JOptionPane.showConfirmDialog(null, "Deseja excluir está tarefa?", // Um showConfirmDialog para confirmar se
-                                                                               // a pessoa realmente quer excluir a
-                                                                               // tarefa.
-                "Exclui", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
-            // Exclui a task selecionada da lista de tasks
-            int selectedIndex = taskList.getSelectedIndex();
-            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
-                tasks.remove(selectedIndex);
-                updateTaskList();
-            }
-        }
-    }
-
-    private void markTaskDone() {
-        // Marca a task selecionada como concluída
-        int selectedIndex = taskList.getSelectedIndex();
-        if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
-            Task task = tasks.get(selectedIndex);
-            task.setDone(true);
-            updateTaskList();
-        }
-    }
-
-    private void unmarkTaskDone() {
-        if (JOptionPane.showConfirmDialog(null, "Deseja realmente desmarcar a tarefa concluída?",
-                "Desmarcar tarefa", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            // Desfaz a marcação da task selecionada
-            int selectedIndex = taskList.getSelectedIndex();
-            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
-                Task task = tasks.get(selectedIndex);
-                task.setDone(false);
-                updateTaskList();
-            }
-        }
-    }
-
-    private void filterTasks() {
-        // Filtra as tasks com base na seleção do JComboBox
-        String filter = (String) filterComboBox.getSelectedItem();
-        listModel.clear();
-        for (Task task : tasks) {
-            if (filter.equals("Todas") || (filter.equals("Ativas") &&
-                    !task.isDone()) || (filter.equals("Concluídas") && task.isDone())) {
-                listModel.addElement(task.getDescription());
-            }
-        }
-    }
-
-    private void clearCompletedTasks() {
-        // Limpa todas as tasks concluídas da lista
-        List<Task> completedTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.isDone()) {
-                completedTasks.add(task);
-            }
-        }
-        tasks.removeAll(completedTasks);
-        updateTaskList();
-    }
-
-    private void updateTaskList() {
-        // Atualiza a lista de tasks exibida na GUI
-        listModel.clear();
-        for (Task task : tasks) {
-            listModel.addElement(task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
-        }
-    }
-
-    // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Criação de Handlers para receberem o eventos de MouseListener
 
     // Handler de MouseListener para os botões
+    // Evento de exclusão para o mouse
     public class DeleteClick implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            deleteTask();
+            if (taskList.getSelectedIndex() >= 0) {
+                deleteTask();
+            }
         }
 
         @Override
@@ -367,6 +323,7 @@ public class TodoList extends JFrame {
 
     }
 
+    // Evento de adição para o mouse
     public class AddClick implements MouseListener {
 
         @Override
@@ -394,6 +351,7 @@ public class TodoList extends JFrame {
 
     }
 
+    // Evento de limpar para o mouse
     public class ClearCheckClick implements MouseListener {
 
         @Override
@@ -419,6 +377,7 @@ public class TodoList extends JFrame {
 
     }
 
+    // Evento de desmarcar tarefa para o mouse
     public class UnmarkTaskClick implements MouseListener {
 
         @Override
@@ -448,6 +407,7 @@ public class TodoList extends JFrame {
 
     }
 
+    // Evento para abrir a página de "Sobre nós com o mouse"
     public class AboutClick implements MouseListener {
 
         @Override
@@ -474,24 +434,123 @@ public class TodoList extends JFrame {
     }
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // Outros métodos simples
 
-    // Método de rodar o programa
+    // Criação de Métodos
+
+    // Criação do método de adicionar lista.
+    private void addTask() {
+        // Adiciona uma nova task à lista de tasks
+        String taskDescription = taskInputField.getText().trim();// remove espaços vazios
+        cont++;
+        if (!taskDescription.isEmpty()) {
+            Task newTask = new Task(cont + ". " + taskDescription);
+            tasks.add(newTask);
+            updateTaskList();
+            taskInputField.setText("");
+        }
+    }
+
+    // Método de Exclusão
+    private void deleteTask() {
+        if (JOptionPane.showConfirmDialog(null, "Deseja Excluir Essa Tarefa?",
+                "Excluindo Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+            // Exclui a task selecionada da lista de tasks
+            int selectedIndex = taskList.getSelectedIndex();
+            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+                tasks.remove(selectedIndex);
+                updateTaskList();
+                if (!tasks.isEmpty()) {
+                    if (selectedIndex < tasks.size()) {
+                        for (int i = selectedIndex; i < tasks.size(); i++) {
+                            tasks.get(i).setDescription((i + 1) + ". " + tasks.get(i).getDescription().substring(3));
+                        }
+                    }
+                    cont = tasks.size(); // redefine o contador para o tamanho atual da lista
+                } else {
+                    cont = 0; // redefine o contador se a lista estiver vazia
+                }
+            }
+        }
+    }
+
+    // Método de Marcação
+    private void markTaskDone() {
+        // Marca a task selecionada como concluída
+        int selectedIndex = taskList.getSelectedIndex();
+        if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+            Task task = tasks.get(selectedIndex);
+            task.setDone(true);
+            updateTaskList();
+        }
+    }
+
+    // Método de Desmarcação
+    private void unmarkTaskDone() {
+        if (JOptionPane.showConfirmDialog(null, "Deseja Desmarcar Essa Tarefa concluída?",
+                "Desmarcando Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // Desfaz a marcação da task selecionada
+            int selectedIndex = taskList.getSelectedIndex();
+            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+                Task task = tasks.get(selectedIndex);
+                task.setDone(false);
+                updateTaskList();
+            }
+        }
+    }
+
+    // Método de Filtro
+    private void filterTasks() {
+        // Filtra as tasks com base na seleção do JComboBox
+        
+        String filter = (String) filterComboBox.getSelectedItem();
+        listModel.clear();
+        for (Task task : tasks) {
+            if (filter.equals("Todas") || (filter.equals("Ativas") &&
+                    !task.isDone()) || (filter.equals("Concluídas") && task.isDone())) {
+                listModel.addElement(task.getDescription());
+            }
+        }
+    }
+
+    // Método de Limpar Tarefas Concluídas
+    private void clearCompletedTasks() {
+        // Limpa todas as tasks concluídas da lista
+        List<Task> completedTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.isDone()) {
+                completedTasks.add(task);
+            }
+        }
+        tasks.removeAll(completedTasks);
+        updateTaskList();
+    }
+
+    // Método de Atualizar Página
+    private void updateTaskList() {
+        // Atualiza a lista de tasks exibida na GUI
+        listModel.clear();
+        for (Task task : tasks) {
+            listModel.addElement(task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
+        }
+    }
+
+    // Método de Rodar o Programa
     public void run() {
         // Exibe a janela
         this.setVisible(true);
     }
 
-    // Método de exibir uma mensagem ao fechar programa
+    // Método de Exibir Uma Mensagem ao Fechar Programa
     public void close() {
         if (JOptionPane.showConfirmDialog(null, "Deseja sair do programa?",
-                "Sair", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Obrigado por utilizar nosso programa!");
+                "Saindo...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         }
 
     }
 
+    // Método Céditos
     public void aboutPage() {
         JOptionPane.showMessageDialog(null, "Sobre o Programa:\n\n"
                 + "Version: 0.1\n"

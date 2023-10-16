@@ -70,7 +70,7 @@ public class TodoList extends JFrame {
         super("To-Do List App");
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Faz nada ao tentar fechar o programa
-        this.setSize(465, 350);
+        this.setSize(470, 350);
 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ public class TodoList extends JFrame {
 
         // Evento de arrastar:
         // Define a fonte de arrastar
-        DragSource dragText =   DragSource.getDefaultDragSource(); // Declaração no qual o componente será arrastado,
+        DragSource dragText = DragSource.getDefaultDragSource(); // Declaração no qual o componente será arrastado,
                                                                  // nesse
                                                                  // caso, será o texto da lista.
         DragGestureRecognizer arrastar = dragText.createDefaultDragGestureRecognizer( // Declaração da função de
@@ -441,13 +441,17 @@ public class TodoList extends JFrame {
     private void addTask() {
         // Adiciona uma nova task à lista de tasks
         String taskDescription = taskInputField.getText().trim();// remove espaços vazios
-        cont++;
         if (!taskDescription.isEmpty()) {
+            cont++;
             Task newTask = new Task(cont + ". " + taskDescription);
             tasks.add(newTask);
             updateTaskList();
             taskInputField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, adicione uma tarefa!", "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
         }
+
     }
 
     // Método de Exclusão
@@ -487,7 +491,7 @@ public class TodoList extends JFrame {
 
     // Método de Desmarcação
     private void unmarkTaskDone() {
-        if (JOptionPane.showConfirmDialog(null, "Deseja Desmarcar Essa Tarefa concluída?",
+        if (JOptionPane.showConfirmDialog(null, "Deseja desmarcar essa tarefa concluída?",
                 "Desmarcando Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // Desfaz a marcação da task selecionada
             int selectedIndex = taskList.getSelectedIndex();
@@ -502,13 +506,13 @@ public class TodoList extends JFrame {
     // Método de Filtro
     private void filterTasks() {
         // Filtra as tasks com base na seleção do JComboBox
-        
+
         String filter = (String) filterComboBox.getSelectedItem();
         listModel.clear();
         for (Task task : tasks) {
             if (filter.equals("Todas") || (filter.equals("Ativas") &&
                     !task.isDone()) || (filter.equals("Concluídas") && task.isDone())) {
-                listModel.addElement(task.getDescription());
+                listModel.addElement(task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
             }
         }
     }

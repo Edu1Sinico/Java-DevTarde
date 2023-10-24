@@ -12,7 +12,7 @@ public class OperacoesConsulta {
 
     // construtor
     public OperacoesConsulta(List<AgendarConsulta> agendarConsultaList, DefaultTableModel tableModel, JTable table) {
-        agendarConsultaList = agendarConsultaList;
+        this.agendarConsultaList = agendarConsultaList;
         this.tableModel = tableModel;
         this.table = table;
     }
@@ -42,7 +42,7 @@ public class OperacoesConsulta {
     }
 
     // Método de apagar todas as consultas
-    public void apagarTodoasConsultas() {
+    public void apagarTodasConsultas() {
         agendarConsultaList.clear();
         atualizarTabela();
     }

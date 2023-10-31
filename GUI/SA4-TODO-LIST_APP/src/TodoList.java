@@ -1,44 +1,13 @@
 
 // Importações
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragGestureRecognizer;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceAdapter;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetAdapter;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.datatransfer.*;
+import java.awt.dnd.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Criação do JFrame
@@ -191,14 +160,14 @@ public class TodoList extends JFrame {
                 new DropTargetAdapter() { // No "DropTargetAdapter", você implementa o método "drop", que é chamado
                                           // quando o item é solto.
                     public void drop(DropTargetDropEvent event) {
-                        Transferable tr = event.getTransferable(); // Dentro deste método, você verifica se o
+                        Transferable tr = event.getTransferable(); 
+                        if (tr.isDataFlavorSupported(DataFlavor.stringFlavor)) {// Dentro deste método, você verifica se o
                                                                    // Transferable contém dados com o formato
                                                                    // DataFlavor.stringFlavor. Se contiver, você
                                                                    // chama deleteTask() para executar a
                                                                    // lógica de exclusão da mensagem (ou tarefa)
                                                                    // associada ao item arrastado. Se o formato não
                                                                    // for suportado, o evento é rejeitado.
-                        if (tr.isDataFlavorSupported(DataFlavor.stringFlavor)) {
                             deleteTask();
                             event.dropComplete(true);
                         } else {

@@ -66,7 +66,7 @@ public class JanelaCarrosView extends JPanel {
 
         // Tratamento de eventos;
 
-        // seleciona as linhas da tabela
+        // selecionar os elementos nas linhas da tabela
         table.addMouseListener(new MouseListener() {
 
             @Override
@@ -118,7 +118,7 @@ public class JanelaCarrosView extends JPanel {
 
                 operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
 
-                carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
+                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
                 // Limpa os campos de entrada após a operação de cadastro
                 carMarcaField.setText("");
                 carModeloField.setText("");
@@ -128,6 +128,44 @@ public class JanelaCarrosView extends JPanel {
             }
         });
 
+        // Configura a ação do botão "editar" para atualizar um registro no banco de
+        // dados
+        editar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Chama o método "atualizar" do objeto operacoes com os valores dos
+
+                // campos de entrada
+
+                operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
+
+                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
+                // Limpa os campos de entrada após a operação de atualização
+                carMarcaField.setText("");
+                carModeloField.setText("");
+                carAnoField.setText("");
+                carPlacaField.setText("");
+                carValorField.setText("");
+            }
+        });
+
+        // Configura a ação do botão "apagar" para excluir um registro no banco de dados
+        apagar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Chama o método "apagar" do objeto operacoes com o valor do campo de
+
+                // entrada "placa"
+
+                operacoes.apagar(carPlacaField.getText());
+                // Limpa os campos de entrada após a operação de exclusão
+                carMarcaField.setText("");
+                carModeloField.setText("");
+                carAnoField.setText("");
+                carPlacaField.setText("");
+                carValorField.setText("");
+            }
+        });
     }
 
     // Método para atualizar a tabela de exibição com dados do banco de dados

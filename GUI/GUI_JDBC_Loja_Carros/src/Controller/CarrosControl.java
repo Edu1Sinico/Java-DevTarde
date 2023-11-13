@@ -59,4 +59,7 @@ public class CarrosControl {
         // Chama o método de exclusão no banco de dados
         atualizarTabela(); // Atualiza a tabela de exibição após a exclusão
     }
+
+    public void cadastrar(String text, String text2, String text3, String text4, String text5) {
+    }
 }

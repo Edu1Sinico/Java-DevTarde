@@ -4,12 +4,12 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
 import Connection.CarrosDAO;
+import Controller.CarrosControl;
 // Importação da Classe
 import Model.Carros;
 
@@ -65,17 +65,69 @@ public class JanelaCarrosView extends JPanel {
         atualizarTabela();
 
         // Tratamento de eventos;
-        @Override
-        public void mouseClicked(MouseEvent evt){
-            linhaSelecionada = table.rowAtPoint(evt.getPoint());
-            if (linhaSelecionada != -1){
-                carMarcaField.setText((string) table.getValueAt(linhaSelecionada, 0));
-                carModeloField.setText((String) table.getValueAt(linhaSelecionada, 1));
-                carAnoField.setText((String) table.getValueAt(linhaSelecionada,2));
-                carPlacaField.setText((String) table.getValueAt(linhaSelecionada,3));
-                carValorField.setText((String) table.getValueAt(linhaSelecionada,4));
+
+        // seleciona as linhas da tabela
+        table.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                linhaSelecionada = table.rowAtPoint(evt.getPoint());
+                if (linhaSelecionada != -1) {
+                    carMarcaField.setText((String) table.getValueAt(linhaSelecionada, 0));
+                    carModeloField.setText((String) table.getValueAt(linhaSelecionada, 1));
+                    carAnoField.setText((String) table.getValueAt(linhaSelecionada, 2));
+                    carPlacaField.setText((String) table.getValueAt(linhaSelecionada, 3));
+                    carValorField.setText((String) table.getValueAt(linhaSelecionada, 4));
+                }
             }
-        }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+            }
+        });
+
+        CarrosControl operacoes = new CarrosControl(carros, tableModel, table);
+
+        // Cadastrar
+        cadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Chama o método "cadastrar" do objeto operacoes com os valores dos
+
+                // campos de entrada
+
+                operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
+
+                carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
+                // Limpa os campos de entrada após a operação de cadastro
+                carMarcaField.setText("");
+                carModeloField.setText("");
+                carAnoField.setText("");
+                carPlacaField.setText("");
+                carValorField.setText("");
+            }
+        });
+
     }
 
     // Método para atualizar a tabela de exibição com dados do banco de dados

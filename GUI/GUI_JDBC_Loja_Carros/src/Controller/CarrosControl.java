@@ -35,18 +35,20 @@ public class CarrosControl {
                     carro.getAno(), carro.getPlaca(), carro.getPreco() });
         }
     }
+    
+    // ATUALIZAR OS MÉTODOS DEPOIS
 
     // Método para cadastrar um novo carro no banco de dados
-    public void cadastrar(String marca, String modelo, String ano, String placa, String valor) {
-        new CarrosDAO().cadastrar(marca, modelo, ano, placa, valor);
+    public void cadastrar(String marca, String modelo, String ano, String placa, double valor, boolean vendido) {
+        new CarrosDAO().cadastrar(marca, modelo, ano, placa, valor, vendido);
         // Chama o método de cadastro no banco de dados
 
         atualizarTabela(); // Atualiza a tabela de exibição após o cadastro
     }
 
     // Método para atualizar os dados de um carro no banco de dados
-    public void atualizar(String marca, String modelo, String ano, String placa, String valor) {
-        new CarrosDAO().atualizar(marca, modelo, ano, placa, valor);
+    public void atualizar(String marca, String modelo, String ano, String placa, double valor, boolean vendido) {
+        new CarrosDAO().atualizar(marca, modelo, ano, placa, valor, vendido);
         // Chama o método de atualização no banco de dados
         atualizarTabela(); // Atualiza a tabela de exibição após a atualização
     }

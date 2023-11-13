@@ -76,7 +76,7 @@ public class CarrosDAO {
     }
 
     // Cadastrar Carro no banco
-    public void cadastrar(String marca, String modelo, String ano, String placa, Double valor, Boolean vendido) {
+    public void cadastrar(String marca, String modelo, String ano, String placa, double valor, Boolean vendido) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela
         String sql = "INSERT INTO carros_lojacarros (modelo, marca, ano, valor, placa, vendido) VALUES (?, ?, ?, ?, ?, ?)";
@@ -98,7 +98,7 @@ public class CarrosDAO {
     }
 
     // Atualizar dados no banco
-    public void atualizar(String marca, String modelo, String ano, String placa, Double valor, boolean vendido) {
+    public void atualizar(String marca, String modelo, String ano, String placa, double valor, boolean vendido) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para atualizar dados pela placa
         String sql = "UPDATE carros_lojacarros SET marca = ?, modelo = ?, ano = ?, valor = ?, vendido = ? WHERE placa = ?";

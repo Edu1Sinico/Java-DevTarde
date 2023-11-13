@@ -19,5 +19,5 @@ public class JanelaPrincipal extends JFrame {
     // métodos para tornar a janela visível
     public void run() {
         this.setVisible(true);
-    }
+}
 }

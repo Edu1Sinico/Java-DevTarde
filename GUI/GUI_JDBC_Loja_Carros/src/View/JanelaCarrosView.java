@@ -15,9 +15,10 @@ import Model.Carros;
 
 public class JanelaCarrosView extends JPanel {
 
-    private JButton cadastrar, apagar, editar;
+    private JButton cadastrar, apagar, editar, limpar;
     private JTextField carMarcaField, carModeloField, carAnoField, carPlacaField, carValorField;
     private List<Carros> carros;
+    private JComboBox vendidoComboBox;
     private JTable table;
     private DefaultTableModel tableModel;
     private int linhaSelecionada = -1;
@@ -28,7 +29,7 @@ public class JanelaCarrosView extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(new JLabel("Cadastro Carros"));
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(5, 2));
+        inputPanel.setLayout(new GridLayout(6, 2));
         inputPanel.add(new JLabel("Marca"));
         carMarcaField = new JTextField(20);
         inputPanel.add(carMarcaField);
@@ -44,17 +45,24 @@ public class JanelaCarrosView extends JPanel {
         inputPanel.add(new JLabel("Valor"));
         carValorField = new JTextField(20);
         inputPanel.add(carValorField);
+        inputPanel.add(new JLabel("Vendido"));
+        vendidoComboBox = new JComboBox();
+        vendidoComboBox.addItem("Não Vendido");
+        vendidoComboBox.addItem("Vendido");
+        inputPanel.add(vendidoComboBox);
+
         add(inputPanel);
         JPanel botoes = new JPanel();
         botoes.add(cadastrar = new JButton("Cadastrar"));
         botoes.add(editar = new JButton("Editar"));
         botoes.add(apagar = new JButton("Apagar"));
+        botoes.add(limpar = new JButton("Limpar"));
         add(botoes);
         // tabela de carros
         JScrollPane jSPane = new JScrollPane();
         add(jSPane);
         tableModel = new DefaultTableModel(new Object[][] {},
-                new String[] { "Marca", "Modelo", "Ano", "Placa", "Valor" });
+                new String[] { "Marca", "Modelo", "Ano", "Placa", "Valor", "Vendido" });
         table = new JTable(tableModel);
         jSPane.setViewportView(table);
 
@@ -67,8 +75,7 @@ public class JanelaCarrosView extends JPanel {
         // Tratamento de eventos;
 
         // selecionar os elementos nas linhas da tabela
-        table.addMouseListener(new MouseListener() {
-
+        table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 linhaSelecionada = table.rowAtPoint(evt.getPoint());
@@ -78,31 +85,8 @@ public class JanelaCarrosView extends JPanel {
                     carAnoField.setText((String) table.getValueAt(linhaSelecionada, 2));
                     carPlacaField.setText((String) table.getValueAt(linhaSelecionada, 3));
                     carValorField.setText((String) table.getValueAt(linhaSelecionada, 4));
+                    vendidoComboBox.setSelectedItem((String) table.getValueAt(linhaSelecionada, 5));
                 }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
             }
         });
 
@@ -115,11 +99,30 @@ public class JanelaCarrosView extends JPanel {
                 // Chama o método "cadastrar" do objeto operacoes com os valores dos
 
                 // campos de entrada
+                int ano = Integer.parseInt(carAnoField.getText());
+                if (ano > 1900 && ano < 2024) {
+                    operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
 
-                operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
+                            carAnoField.getText(), carPlacaField.getText(), carValorField.getText(),
+                            (String) vendidoComboBox.getSelectedItem());
+                    // Limpa os campos de entrada após a operação de cadastro
+                    carMarcaField.setText("");
+                    carModeloField.setText("");
+                    carAnoField.setText("");
+                    carPlacaField.setText("");
+                    carValorField.setText("");
 
-                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
-                // Limpa os campos de entrada após a operação de cadastro
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data Inválida", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        // Limpar campos
+        limpar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 carMarcaField.setText("");
                 carModeloField.setText("");
                 carAnoField.setText("");
@@ -136,16 +139,21 @@ public class JanelaCarrosView extends JPanel {
                 // Chama o método "atualizar" do objeto operacoes com os valores dos
 
                 // campos de entrada
+                int ano = Integer.parseInt(carAnoField.getText());
+                if (ano > 1900 && ano < 2024) {
+                    operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
 
-                operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
-
-                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
-                // Limpa os campos de entrada após a operação de atualização
-                carMarcaField.setText("");
-                carModeloField.setText("");
-                carAnoField.setText("");
-                carPlacaField.setText("");
-                carValorField.setText("");
+                            carAnoField.getText(), carPlacaField.getText(), carValorField.getText(),
+                            (String) vendidoComboBox.getSelectedItem());
+                    // Limpa os campos de entrada após a operação de atualização
+                    carMarcaField.setText("");
+                    carModeloField.setText("");
+                    carAnoField.setText("");
+                    carPlacaField.setText("");
+                    carValorField.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data Inválida", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
@@ -177,7 +185,7 @@ public class JanelaCarrosView extends JPanel {
             // Adiciona os dados de cada carro como uma nova linha na tabela Swing
             tableModel.addRow(new Object[] { carro.getMarca(), carro.getModelo(),
 
-                    carro.getAno(), carro.getPlaca(), carro.getPreco() });
+                    carro.getAno(), carro.getPlaca(), carro.getPreco(), carro.getVendido() });
         }
     }
 }

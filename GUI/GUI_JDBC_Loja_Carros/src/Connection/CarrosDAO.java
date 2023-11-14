@@ -26,7 +26,7 @@ public class CarrosDAO {
 
     // criar Tabela
     public void criaTabela() {
-        String sql = "CREATE TABLE IF NOT EXISTS carros_lojacarros (MODELO VARCHAR(255), MARCA VARCHAR(255), ANO VARCHAR(255), VALOR MONEY, PLACA VARCHAR(255) PRIMARY KEY, VENDIDO BOOLEAN)";
+        String sql = "CREATE TABLE IF NOT EXISTS carros_lojacarros (MODELO VARCHAR(255), MARCA VARCHAR(255), ANO VARCHAR(4), VALOR VARCHAR(255), PLACA VARCHAR(255) PRIMARY KEY, VENDIDO VARCHAR(255))";
         try (Statement stmt = this.connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela criada com sucesso.");
@@ -60,9 +60,9 @@ public class CarrosDAO {
                     rs.getString("modelo"), 
                     rs.getString("marca"), 
                     rs.getString("ano"), 
-                    rs.getDouble("valor"),
+                    rs.getString("valor"),
                     rs.getString("placa"),
-                    rs.getBoolean("Vendido"));
+                    rs.getString("Vendido"));
                 carros.add(carro); // Adiciona o objeto Carros à lista de carros
             }
         } catch (SQLException ex) {
@@ -76,7 +76,7 @@ public class CarrosDAO {
     }
 
     // Cadastrar Carro no banco
-    public void cadastrar(String marca, String modelo, String ano, String placa, double valor, Boolean vendido) {
+    public void cadastrar(String marca, String modelo, String ano, String placa, String valor, String vendido) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela
         String sql = "INSERT INTO carros_lojacarros (modelo, marca, ano, valor, placa, vendido) VALUES (?, ?, ?, ?, ?, ?)";
@@ -85,9 +85,9 @@ public class CarrosDAO {
             stmt.setString(1, modelo);
             stmt.setString(2, marca);
             stmt.setString(3, ano);
-            stmt.setDouble(4, valor);
+            stmt.setString(4, valor);
             stmt.setString(5, placa);
-            stmt.setBoolean(6, vendido);
+            stmt.setString(6, vendido);
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
         } catch (SQLException e) {
@@ -98,7 +98,7 @@ public class CarrosDAO {
     }
 
     // Atualizar dados no banco
-    public void atualizar(String marca, String modelo, String ano, String placa, double valor, boolean vendido) {
+    public void atualizar(String marca, String modelo, String ano, String placa, String valor, String vendido) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para atualizar dados pela placa
         String sql = "UPDATE carros_lojacarros SET marca = ?, modelo = ?, ano = ?, valor = ?, vendido = ? WHERE placa = ?";
@@ -107,10 +107,10 @@ public class CarrosDAO {
             stmt.setString(1, modelo);
             stmt.setString(2, marca);
             stmt.setString(3, ano);
-            stmt.setDouble(4, valor);
+            stmt.setString(4, valor);
             // placa é chave primaria não pode ser alterada.
             stmt.setString(5, placa);
-            stmt.setBoolean(6, vendido);
+            stmt.setString(6, vendido);
             stmt.executeUpdate();
             System.out.println("Dados atualizados com sucesso");
         } catch (SQLException e) {

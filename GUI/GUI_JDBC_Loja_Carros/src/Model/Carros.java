@@ -6,12 +6,12 @@ public class Carros {
     private String modelo;
     private String marca;
     private String ano;
-    private double preco;
+    private String preco;
     private String placa;
-    private Boolean vendido;
+    private String vendido;
     
     // Construtores
-    public Carros(String modelo, String marca, String ano, double preco, String placa, Boolean vendido) {
+    public Carros(String modelo, String marca, String ano, String preco, String placa, String vendido) {
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
@@ -41,10 +41,10 @@ public class Carros {
     public void setAno(String ano) {
         this.ano = ano;
     }
-    public double getPreco() {
+    public String getPreco() {
         return preco;
     }
-    public void setPreco(double preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
     public String getPlaca() {
@@ -53,10 +53,10 @@ public class Carros {
     public void setPlaca(String placa) {
         this.placa = placa;
     }
-    public Boolean getVendido() {
+    public String getVendido() {
         return vendido;
     }
-    public void setVendido(Boolean vendido) {
+    public void setVendido(String vendido) {
         this.vendido = vendido;
     }
 

@@ -247,7 +247,7 @@ public class JanelaCarrosView extends JPanel {
                 // Chama o método "apagar" do objeto operacoes com o valor do campo de
 
                 // entrada "placa"
-                if (JOptionPane.showConfirmDialog(null, "Deseja Excluir Essa Tarefa?",
+                if (JOptionPane.showConfirmDialog(null, "Deseja excluir esse cadastro?",
                         "Excluindo Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     operacoes.apagar(carPlacaField.getText());
                     // Limpa os campos de entrada após a operação de exclusão

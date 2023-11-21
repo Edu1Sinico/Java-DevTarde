@@ -1,4 +1,3 @@
-import View.JanelaCarrosView;
 import View.JanelaPrincipal;
 
 public class App {

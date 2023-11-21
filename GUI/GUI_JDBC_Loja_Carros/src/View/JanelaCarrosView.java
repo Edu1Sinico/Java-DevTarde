@@ -91,11 +91,17 @@ public class JanelaCarrosView extends JPanel {
                     carModeloField.setText((String) table.getValueAt(linhaSelecionada, 1));
                     carAnoField.setText((String) table.getValueAt(linhaSelecionada, 2));
                     carPlacaField.setText((String) table.getValueAt(linhaSelecionada, 3));
+                    // Desativa o textfield da placa
+                    carPlacaField.setEditable(false);
+                    // Desativa o botão
+                    cadastrar.setEnabled(false);
                     carValorField.setText((String) table.getValueAt(linhaSelecionada, 4));
                     vendidoComboBox.setSelectedItem((String) table.getValueAt(linhaSelecionada, 5));
-                }
-                else{
-                    // carPlacaField.en
+                } else {
+                    // Ativa o textfield da placa
+                    carPlacaField.setEditable(true);
+                    // Ativa o botão
+                    cadastrar.setEnabled(true);
                 }
             }
         });
@@ -179,6 +185,9 @@ public class JanelaCarrosView extends JPanel {
                 carAnoField.setText("");
                 carPlacaField.setText("");
                 carValorField.setText("");
+                carValorField.setEditable(true);
+                cadastrar.setEnabled(true);
+                table.clearSelection();
             }
         });
 
@@ -197,44 +206,28 @@ public class JanelaCarrosView extends JPanel {
 
                         int ano = Integer.parseInt(carAnoField.getText());
 
-                        if (carPlacaField.getText().matches("[A-Z]{3}-\\d{4}")) { // Define uma condição para verificar
-                                                                                  // se o padrão da
-                                                                                  // placa está entre A e Z com 3
-                                                                                  // caracteres, se possui um
-                                                                                  // "-" e colocar \\d de 0 a 9 com 4
-                                                                                  // caracteres de
-                                                                                  // tamanho.
+                        System.out.println(anoAtual);
+                        if (ano > 1900 && ano < anoAtual + 1) {
+                            operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
 
-                            System.out.println(anoAtual);
-                            if (ano > 1900 && ano < anoAtual + 1) {
-                                operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
-
-                                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText(),
-                                        (String) vendidoComboBox.getSelectedItem());
-                                // Limpa os campos de entrada após a operação de atualização
-                                carMarcaField.setText("");
-                                carModeloField.setText("");
-                                carAnoField.setText("");
-                                carPlacaField.setText("");
-                                carValorField.setText("");
-                            } else {
-                                throw new LimitedYearException("Ano Inválido, Por favor digite um ano válido.");
-                            }
+                                    carAnoField.getText(), carPlacaField.getText(), carValorField.getText(),
+                                    (String) vendidoComboBox.getSelectedItem());
+                            // Limpa os campos de entrada após a operação de atualização
+                            carMarcaField.setText("");
+                            carModeloField.setText("");
+                            carAnoField.setText("");
+                            carPlacaField.setText("");
+                            carValorField.setText("");
                         } else {
-                            throw new CarValidationException(
-                                    "Placa de Carro Inválido, Por favor digite uma placa de carro válida. "
-                                            + "\n\n Exemplo: "
-                                            + "\n ABC-1234");
+                            throw new LimitedYearException("Ano Inválido, Por favor digite um ano válido.");
                         }
+
                     } else {
                         throw new NullPointerException(
                                 "Informações inválidas. Por favor preencha as informações vazias.");
                     }
                 } catch (LimitedYearException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "LimitedYearException",
-                            JOptionPane.WARNING_MESSAGE);
-                } catch (CarValidationException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "CarValidationException",
                             JOptionPane.WARNING_MESSAGE);
                 } catch (NullPointerException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "NullPointerException",
@@ -254,14 +247,16 @@ public class JanelaCarrosView extends JPanel {
                 // Chama o método "apagar" do objeto operacoes com o valor do campo de
 
                 // entrada "placa"
-
-                operacoes.apagar(carPlacaField.getText());
-                // Limpa os campos de entrada após a operação de exclusão
-                carMarcaField.setText("");
-                carModeloField.setText("");
-                carAnoField.setText("");
-                carPlacaField.setText("");
-                carValorField.setText("");
+                if (JOptionPane.showConfirmDialog(null, "Deseja Excluir Essa Tarefa?",
+                        "Excluindo Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    operacoes.apagar(carPlacaField.getText());
+                    // Limpa os campos de entrada após a operação de exclusão
+                    carMarcaField.setText("");
+                    carModeloField.setText("");
+                    carAnoField.setText("");
+                    carPlacaField.setText("");
+                    carValorField.setText("");
+                }
             }
 
         });

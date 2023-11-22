@@ -30,7 +30,7 @@ public class JanelaRegistarVenda extends JPanel {
         carrosComboBox = new JComboBox<>();
         // preencha o JComboBox com os carros
         carros = new CarrosDAO().listarTodos();
-        carrosComboBox.addItem("Selecione o Carro");
+        carrosComboBox.addItem("Selecione um Carro");
         for (Carros carro : carros) {
             carrosComboBox.addItem(carro.getMarca()
                     + " - " + carro.getModelo() + " - " + carro.getPreco() +" - " + carro.getPlaca());
@@ -40,7 +40,7 @@ public class JanelaRegistarVenda extends JPanel {
         // preencha o JComboBox com os clientes
         clienteComboBox = new JComboBox<>();
         clientes = new ClientesDAO().listarTodos();
-        clienteComboBox.addItem("Selecione o Cliente");
+        clienteComboBox.addItem("Selecione um Cliente");
         for (Clientes cliente : clientes) {
             clienteComboBox.addItem(cliente.getNome());
         }

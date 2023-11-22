@@ -24,7 +24,7 @@ public class ClientesDAO {
         String sql = "CREATE TABLE IF NOT EXISTS clientes_lojacarros (NOME VARCHAR(255), IDADE VARCHAR(2), CPF VARCHAR(14) PRIMARY KEY, EMAIL VARCHAR(255), TELEFONE VARCHAR(255), ENDERECO VARCHAR(255))";
         try (Statement stmt = this.connection.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Tabela criada com sucesso.");
+            System.out.println("Tabela Clientes criada com sucesso.");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao criar a tabela: " + e.getMessage(), e);
         } finally {

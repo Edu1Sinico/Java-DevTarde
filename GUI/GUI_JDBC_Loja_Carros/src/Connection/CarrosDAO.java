@@ -29,7 +29,7 @@ public class CarrosDAO {
         String sql = "CREATE TABLE IF NOT EXISTS carros_lojacarros (MODELO VARCHAR(255), MARCA VARCHAR(255), ANO VARCHAR(4), VALOR VARCHAR(255), PLACA VARCHAR(255) PRIMARY KEY, VENDIDO VARCHAR(255))";
         try (Statement stmt = this.connection.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Tabela criada com sucesso.");
+            System.out.println("Tabela Carros criada com sucesso.");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao criar a tabela: " + e.getMessage(), e);
         } finally {

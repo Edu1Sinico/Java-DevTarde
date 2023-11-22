@@ -118,6 +118,12 @@ public class JanelaCarrosView extends JPanel {
                             || carAnoField.getText().isEmpty()
                             || carPlacaField.getText().isEmpty() || carValorField.getText().isEmpty())) {
 
+                        for (Carros carro : carros) {
+                            if (carPlacaField.getText().equals(carro.getPlaca())) {
+                                throw new CarValidationException("Placa já cadastrado, por favor utilize outro placa.");
+                            }
+                        }
+
                         int ano = Integer.parseInt(carAnoField.getText());
 
                         if (carPlacaField.getText().matches("[A-Z]{3}-\\d{4}")) { // Define uma condição para verificar
@@ -128,7 +134,7 @@ public class JanelaCarrosView extends JPanel {
                                                                                   // caracteres de
                                                                                   // tamanho.
 
-                            if (ano > 1900 && ano < anoAtual + 1) {
+                            if (ano > 1900 && ano <= anoAtual + 1) {
                                 operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
 
                                         carAnoField.getText(), carPlacaField.getText().toUpperCase(),
@@ -244,9 +250,10 @@ public class JanelaCarrosView extends JPanel {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "NullPointerException",
                             JOptionPane.WARNING_MESSAGE);
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Formatação inválida, por favor digite somente números válidos.", "NumberFormatException",
+                    JOptionPane.showMessageDialog(null,
+                            "Formatação inválida, por favor digite somente números válidos.", "NumberFormatException",
                             JOptionPane.WARNING_MESSAGE);
-                }catch (Exception ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro Desconhecido.", "Exception",
                             JOptionPane.WARNING_MESSAGE);
                 }

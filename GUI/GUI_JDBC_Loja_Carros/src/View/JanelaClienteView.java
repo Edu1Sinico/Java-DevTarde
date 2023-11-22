@@ -112,12 +112,19 @@ public class JanelaClienteView extends JPanel {
                             || cliCpfField.getText().isEmpty()
                             || cliEmailField.getText().isEmpty() || cliTelefoneField.getText().isEmpty()
                             || cliEnderecoField.getText().isEmpty())) {
+                        
+                        for (Clientes cliente : clientes) {
+                            if (cliCpfField.getText().equals(cliente.getCpf())){
+                                throw new CpfValidiationException("CPF já cadastrado, por favor utilize outro CPF.");
+                            }
+                        }
+                            
 
                         int idade = Integer.parseInt(cliIdadeField.getText());
 
                         if (cliCpfField.getText().matches("\\d{3}.\\d{3}.\\d{3}-\\d{2}")) {
 
-                            if (idade > 18 && idade < 120) {
+                            if (idade >= 18 && idade < 120) {
                                 operacoes.cadastrar(cliNomeField.getText(), cliIdadeField.getText(),
 
                                         cliCpfField.getText(), cliEmailField.getText(),
@@ -158,10 +165,10 @@ public class JanelaClienteView extends JPanel {
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Formatação inválida, por favor digite somente números válidos.", "NumberFormatException",
                             JOptionPane.WARNING_MESSAGE);
-                }/*  catch (Exception ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro Desconhecido.", "Exception",
                             JOptionPane.WARNING_MESSAGE);
-                }*/
+                }
 
             }
         });
@@ -200,7 +207,7 @@ public class JanelaClienteView extends JPanel {
 
                             int idade = Integer.parseInt(cliIdadeField.getText());
 
-                            if (idade > 18 && idade < 120) {
+                            if (idade >= 18 && idade < 120) {
                                 operacoes.atualizar(cliNomeField.getText(), cliIdadeField.getText(),
 
                                         cliCpfField.getText(), cliEmailField.getText(),

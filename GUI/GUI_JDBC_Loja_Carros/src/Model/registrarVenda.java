@@ -1,5 +1,5 @@
 package Model;
 
-public class registrarVenda {
-    
+public class RegistrarVenda{
+
 }

@@ -57,12 +57,12 @@ public class CarrosDAO {
                 // registro
 
                 Carros carro = new Carros(
-                    rs.getString("modelo"), 
-                    rs.getString("marca"), 
-                    rs.getString("ano"), 
-                    rs.getString("valor"),
-                    rs.getString("placa"),
-                    rs.getString("Vendido"));
+                        rs.getString("modelo"),
+                        rs.getString("marca"),
+                        rs.getString("ano"),
+                        rs.getString("valor"),
+                        rs.getString("placa"),
+                        rs.getString("Vendido"));
                 carros.add(carro); // Adiciona o objeto Carros à lista de carros
             }
         } catch (SQLException ex) {
@@ -104,13 +104,13 @@ public class CarrosDAO {
         String sql = "UPDATE carros_lojacarros SET marca = ?, modelo = ?, ano = ?, valor = ?, vendido = ? WHERE placa = ?";
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, modelo);
-            stmt.setString(2, marca);
+            stmt.setString(1, marca);
+            stmt.setString(2, modelo);
             stmt.setString(3, ano);
             stmt.setString(4, valor);
             // placa é chave primaria não pode ser alterada.
-            stmt.setString(5, placa);
-            stmt.setString(6, vendido);
+            stmt.setString(5, vendido);
+            stmt.setString(6, placa);
             stmt.executeUpdate();
             System.out.println("Dados atualizados com sucesso");
         } catch (SQLException e) {

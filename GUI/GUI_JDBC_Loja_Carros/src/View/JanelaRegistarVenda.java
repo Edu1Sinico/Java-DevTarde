@@ -1,5 +1,7 @@
 package View;
 
-public class JanelaRegistarVenda {
+import javax.swing.JPanel;
+
+public class JanelaRegistarVenda extends JPanel{
     
 }

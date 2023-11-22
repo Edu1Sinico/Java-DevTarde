@@ -11,9 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Connection.CarrosDAO;
 import Controller.CarrosControl;
-import Exception.CarValidationException;
-import Exception.LimitedYearException;
-import Exception.PriceValidationException;
+import Exception.*;
 // Importação da Classe
 import Model.Carros;
 
@@ -130,7 +128,6 @@ public class JanelaCarrosView extends JPanel {
                                                                                   // caracteres de
                                                                                   // tamanho.
 
-                            System.out.println(anoAtual);
                             if (ano > 1900 && ano < anoAtual + 1) {
                                 operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
 
@@ -170,6 +167,9 @@ public class JanelaCarrosView extends JPanel {
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "NumberFormatException",
                             JOptionPane.WARNING_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro Desconhecido.", "Exception",
+                            JOptionPane.WARNING_MESSAGE);
                 }
 
             }
@@ -185,7 +185,8 @@ public class JanelaCarrosView extends JPanel {
                 carAnoField.setText("");
                 carPlacaField.setText("");
                 carValorField.setText("");
-                carValorField.setEditable(true);
+                vendidoComboBox.setSelectedIndex(0);
+                carPlacaField.setEditable(true);
                 cadastrar.setEnabled(true);
                 table.clearSelection();
             }
@@ -200,40 +201,53 @@ public class JanelaCarrosView extends JPanel {
 
                 // campos de entrada
                 try {
-                    if (!(carMarcaField.getText().isEmpty() || carModeloField.getText().isEmpty()
-                            || carAnoField.getText().isEmpty()
-                            || carPlacaField.getText().isEmpty() || carValorField.getText().isEmpty())) {
+                    if (linhaSelecionada != -1) {
+                        if (!(carMarcaField.getText().isEmpty() || carModeloField.getText().isEmpty()
+                                || carAnoField.getText().isEmpty()
+                                || carPlacaField.getText().isEmpty() || carValorField.getText().isEmpty())) {
 
-                        int ano = Integer.parseInt(carAnoField.getText());
+                            int ano = Integer.parseInt(carAnoField.getText());
 
-                        System.out.println(anoAtual);
-                        if (ano > 1900 && ano < anoAtual + 1) {
-                            operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
+                            System.out.println(anoAtual);
+                            if (ano > 1900 && ano < anoAtual + 1) {
+                                operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
 
-                                    carAnoField.getText(), carPlacaField.getText(), carValorField.getText(),
-                                    (String) vendidoComboBox.getSelectedItem());
-                            // Limpa os campos de entrada após a operação de atualização
-                            carMarcaField.setText("");
-                            carModeloField.setText("");
-                            carAnoField.setText("");
-                            carPlacaField.setText("");
-                            carValorField.setText("");
+                                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText(),
+                                        (String) vendidoComboBox.getSelectedItem());
+                                // Limpa os campos de entrada após a operação de atualização
+                                carMarcaField.setText("");
+                                carModeloField.setText("");
+                                carAnoField.setText("");
+                                carPlacaField.setText("");
+                                carValorField.setText("");
+                                vendidoComboBox.setSelectedIndex(0);
+                                cadastrar.setEnabled(true);
+                                carPlacaField.setEditable(true);
+                            } else {
+                                throw new LimitedYearException("Ano Inválido, Por favor digite um ano válido.");
+                            }
+
                         } else {
-                            throw new LimitedYearException("Ano Inválido, Por favor digite um ano válido.");
+                            throw new NullPointerException(
+                                    "Informações inválidas. Por favor preencha as informações vazias.");
                         }
-
                     } else {
-                        throw new NullPointerException(
-                                "Informações inválidas. Por favor preencha as informações vazias.");
+                        throw new SelectedTableException("Erro de Seleção, por favor selecione uma linha.");
                     }
                 } catch (LimitedYearException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "LimitedYearException",
+                            JOptionPane.WARNING_MESSAGE);
+                } catch (SelectedTableException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "SelectedTableException",
                             JOptionPane.WARNING_MESSAGE);
                 } catch (NullPointerException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "NullPointerException",
                             JOptionPane.WARNING_MESSAGE);
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "NumberFormatException",
+                    JOptionPane.showMessageDialog(null, "Formatação inválida, por favor digite somente números válidos.", "NumberFormatException",
+                            JOptionPane.WARNING_MESSAGE);
+                }catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro Desconhecido.", "Exception",
                             JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -247,15 +261,24 @@ public class JanelaCarrosView extends JPanel {
                 // Chama o método "apagar" do objeto operacoes com o valor do campo de
 
                 // entrada "placa"
-                if (JOptionPane.showConfirmDialog(null, "Deseja excluir esse cadastro?",
-                        "Excluindo Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    operacoes.apagar(carPlacaField.getText());
-                    // Limpa os campos de entrada após a operação de exclusão
-                    carMarcaField.setText("");
-                    carModeloField.setText("");
-                    carAnoField.setText("");
-                    carPlacaField.setText("");
-                    carValorField.setText("");
+                try {
+                    if (linhaSelecionada != -1) {
+                        if (JOptionPane.showConfirmDialog(null, "Deseja excluir esse cadastro?",
+                                "Excluindo Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            operacoes.apagar(carPlacaField.getText());
+                            // Limpa os campos de entrada após a operação de exclusão
+                            carMarcaField.setText("");
+                            carModeloField.setText("");
+                            carAnoField.setText("");
+                            carPlacaField.setText("");
+                            carValorField.setText("");
+                        }
+                    } else {
+                        throw new SelectedTableException("Erro de Seleção, por favor selecione uma linha.");
+                    }
+                } catch (SelectedTableException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "SelectedTableException",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             }
 

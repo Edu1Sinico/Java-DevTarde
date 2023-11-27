@@ -94,7 +94,6 @@ A página de gerenciamento de clientes possui os seguintes elementos:
     <li>Email</li>
     <li>Telefone</li>
     <li>Endereço</li>
-    <li>Botões:</li>
 </ul>
 
 <h3>Botões:</h3>

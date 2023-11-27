@@ -155,3 +155,34 @@ Certifique-se de preencher corretamente todos os campos para evitar erros.
 Utilize os botões correspondentes às operações desejadas.
 Verifique a tabela para confirmar se as operações foram realizadas com sucesso.
 
+<hr>
+
+<h1>Manual de Instruções: Cadastro de Vendas</h1>
+
+Esta página permite o registro de vendas associando um carro a um cliente, inserindo o valor da venda e a data da transação.
+
+<h2>1.Interface de Usuário</h2>
+
+<h3>Campos de Entrada:</h3>
+
+<ul>
+        <li>Carro</li>
+        <li>Cliente</li>
+        <li>Valor da Venda</li>
+        <li>Data da Venda</li>
+</ul>
+
+<h3>Botões:</h3>
+
+<h2>Vender</h2>
+
+<h3>Tabela de Vendas:</h3>
+
+Exibe as vendas realizadas com informações como Marca, Modelo, Placa, Preço, Comprador e Data da Venda.
+
+<h2>Funcionalidades</h2>
+
+Selecione um carro e um cliente na lista suspensa correspondente.
+Insira o valor da venda e a data atual.
+Clique no botão "Vender" para registrar a venda.
+A tabela exibe as vendas realizadas com os detalhes pertinentes.

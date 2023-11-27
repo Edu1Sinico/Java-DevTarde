@@ -4,6 +4,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -126,13 +127,14 @@ public class JanelaCarrosView extends JPanel {
 
                         int ano = Integer.parseInt(carAnoField.getText());
 
-                        if (carPlacaField.getText().matches("[A-Z]{3}-\\d{4}")) { // Define uma condição para verificar
-                                                                                  // se o padrão da
-                                                                                  // placa está entre A e Z com 3
-                                                                                  // caracteres, se possui um
-                                                                                  // "-" e colocar \\d de 0 a 9 com 4
-                                                                                  // caracteres de
-                                                                                  // tamanho.
+                        if (carPlacaField.getText().toUpperCase().matches("[A-Z]{3}-\\d{4}")) { // Define uma condição
+                                                                                                // para verificar
+                            // se o padrão da
+                            // placa está entre A e Z com 3
+                            // caracteres, se possui um
+                            // "-" e colocar \\d de 0 a 9 com 4
+                            // caracteres de
+                            // tamanho.
 
                             if (ano > 1900 && ano <= anoAtual + 1) {
                                 operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
@@ -271,7 +273,7 @@ public class JanelaCarrosView extends JPanel {
                 try {
                     if (linhaSelecionada != -1) {
                         if (JOptionPane.showConfirmDialog(null, "Deseja excluir esse cadastro?",
-                                "Excluindo Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                "Excluindo cadastros...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             operacoes.apagar(carPlacaField.getText());
                             // Limpa os campos de entrada após a operação de exclusão
                             carMarcaField.setText("");

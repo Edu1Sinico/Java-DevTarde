@@ -50,6 +50,7 @@ public class JanelaClienteView extends JPanel {
         cliEnderecoField = new JTextField(20);
         inputPanel.add(cliEnderecoField);
 
+
         add(inputPanel);
         JPanel botoes = new JPanel();
         botoes.add(cadastrar = new JButton("Cadastrar"));
@@ -226,7 +227,6 @@ public class JanelaClienteView extends JPanel {
                                         "Idade inválida, por favor digite uma idade compatível com o Código de Trânsito Brasileiro (CTB), Lei nº 9.503/1997."
                                                 + "\n\n A idade tem que estar entre 18 a 120 anos.");
                             }
-
                         } else {
                             throw new NullPointerException(
                                     "Informações inválidas. Por favor preencha as informações vazias.");

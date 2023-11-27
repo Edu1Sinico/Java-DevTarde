@@ -20,7 +20,7 @@ public class JanelaPrincipal extends JFrame {
         JanelaRegistarVenda tab3 = new JanelaRegistarVenda();
         jTPane.add("Vendas", tab3);
 
-        setBounds(100, 100, 600, 600);
+        setBounds(100, 100, 700, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

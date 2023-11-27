@@ -5,9 +5,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import Connection.CarrosDAO;
 import Connection.ClientesDAO;
-import Model.Carros;
 import Model.Clientes;
 
 public class ClientesControl {
@@ -37,7 +35,7 @@ public class ClientesControl {
 
     // ATUALIZAR OS MÉTODOS DEPOIS
 
-    // Método para cadastrar um novo carro no banco de dados
+    // Método para cadastrar um novo cliente no banco de dados
     public void cadastrar(String nome, String idade, String cpf, String email, String telefone, String endereco) {
         new ClientesDAO().cadastrar(nome, idade, cpf, email, telefone, endereco);
         // Chama o método de cadastro no banco de dados
@@ -45,14 +43,14 @@ public class ClientesControl {
         atualizarTabela(); // Atualiza a tabela de exibição após o cadastro
     }
 
-    // Método para atualizar os dados de um carro no banco de dados
+    // Método para atualizar os dados de um cliente no banco de dados
     public void atualizar(String nome, String idade, String cpf, String email, String telefone, String endereco) {
         new ClientesDAO().atualizar(nome, idade, cpf, email, telefone, endereco);
         // Chama o método de atualização no banco de dados
         atualizarTabela(); // Atualiza a tabela de exibição após a atualização
     }
 
-    // Método para apagar um carro do banco de dados
+    // Método para apagar um cliente do banco de dados
     public void apagar(String cpf) {
         new ClientesDAO().apagar(cpf);
         // Chama o método de exclusão no banco de dados

@@ -39,7 +39,7 @@ public class ClientesDAO {
         ResultSet rs = null;
         // Declaração do objeto ResultSet para armazenar os resultados da consulta
         clientes = new ArrayList<>();
-        // Cria uma lista para armazenar os carros recuperados do banco de dados
+        // Cria uma lista para armazenar os clientes recuperados do banco de dados
         try {
             String sql = "SELECT * FROM clientes_lojacarros";
             stmt = connection.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class ClientesDAO {
 
             // Fecha a conexão, o PreparedStatement e o ResultSet
         }
-        return clientes; // Retorna a lista de carros recuperados do banco de dados
+        return clientes; // Retorna a lista de clientes recuperados do banco de dados
     }
 
     // Cadastrar Carro no banco

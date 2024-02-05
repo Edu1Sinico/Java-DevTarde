@@ -1,3 +1,4 @@
+package view;
 
 // Importações
 import java.awt.*;
@@ -5,6 +6,9 @@ import java.awt.datatransfer.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import controller.ToDoListControl;
+import model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +19,7 @@ import java.util.List;
 public class TodoList extends JFrame {
 
     // Componentes e Atributos
-    ImageIcon imagem = new ImageIcon(getClass().getResource("resource/iconLixeira.png"));
+    ImageIcon imagem = new ImageIcon(getClass().getResource("../resource/iconLixeira.png"));
     public JLabel lIconLixeira = new JLabel(imagem);
     private JPanel mainPanel;
     private JTextField taskInputField;
@@ -109,6 +113,8 @@ public class TodoList extends JFrame {
         // Configuração de Listener para os Eventos
 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // ToDoListControl operacoes = new ToDoListControl(tasks, tableModel, table);
 
         // Tratamento de Eventos
 
@@ -526,7 +532,7 @@ public class TodoList extends JFrame {
     // Método Céditos
     public void aboutPage() {
         JOptionPane.showMessageDialog(null, "Sobre o Programa:\n\n"
-                + "Version: 0.1\n"
+                + "Version: 0.3\n"
                 + "Java JDK 18\n\n"
                 + "Professor: Diogo Takamori\n"
                 + "Colaboradores: Ezequiel e Eduardo\n\n"

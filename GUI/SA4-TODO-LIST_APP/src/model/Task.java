@@ -1,11 +1,18 @@
+package model;
 public class Task {
+
     // Atributos 
     String description;
     boolean done;
+
     // Construtor
-    public Task(String description) {
+    public Task(String description, boolean b) {
         this.description = description;
         this.done = false;
+    }
+
+    public Task(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
@@ -23,5 +30,4 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
-
 }

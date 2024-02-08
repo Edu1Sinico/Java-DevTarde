@@ -2,8 +2,7 @@ package controller;
 
 import java.util.List;
 
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultListModel;
 
 import connection.ToDoListDAO;
 import model.Task;
@@ -11,32 +10,25 @@ import model.Task;
 public class ToDoListControl {
     // Atributos
     private List<Task> tasks;
-    private DefaultTableModel tableModel;
-    private JTable table;
+    private DefaultListModel<String> listModel;
 
     // Construtor
-    public ToDoListControl(List<Task> tasks, DefaultTableModel tableModel, JTable table) {
+    public ToDoListControl(List<Task> tasks, DefaultListModel<String> listModel) {
         this.tasks = tasks;
-        this.tableModel = tableModel;
-        this.table = table;
+        this.listModel = listModel;
     }
 
     // Método para atualizar a tabela de exibição com dados do banco de dados
     private void atualizarTabela() {
-        tableModel.setRowCount(0); // Limpa todas as linhas existentes na tabela
+        listModel.clear(); // Limpa todas as linhas existentes na tabela
         tasks = new ToDoListDAO().listarTodos();
-        // Obtém os carros atualizados do banco de dados
-        for (Task task : tasks) {
-            // Adiciona os dados de cada carro como uma nova linha na tabela Swing
-            tableModel.addRow(new Object[] { task.getDescription(), task.isDone()});
-        }
     }
-    
+
     // ATUALIZAR OS MÉTODOS DEPOIS
 
     // Método para cadastrar um novo carro no banco de dados
-    public void cadastrar(String tarefa, boolean conclusao ) {
-        new ToDoListDAO().cadastrar(tarefa,conclusao);
+    public void cadastrar(String tarefa, boolean conclusao) {
+        new ToDoListDAO().cadastrar(tarefa, conclusao);
         // Chama o método de cadastro no banco de dados
 
         atualizarTabela(); // Atualiza a tabela de exibição após o cadastro

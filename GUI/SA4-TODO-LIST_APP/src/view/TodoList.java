@@ -7,6 +7,7 @@ import java.awt.dnd.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import connection.ToDoListDAO;
 import controller.ToDoListControl;
 import model.Task;
 
@@ -112,6 +113,8 @@ public class TodoList extends JFrame {
         this.add(mainPanel);
         // Configuração de Listener para os Eventos
 
+        new ToDoListDAO().criaTabela();
+
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // ToDoListControl operacoes = new ToDoListControl(tasks, tableModel, table);
@@ -166,14 +169,15 @@ public class TodoList extends JFrame {
                 new DropTargetAdapter() { // No "DropTargetAdapter", você implementa o método "drop", que é chamado
                                           // quando o item é solto.
                     public void drop(DropTargetDropEvent event) {
-                        Transferable tr = event.getTransferable(); 
-                        if (tr.isDataFlavorSupported(DataFlavor.stringFlavor)) {// Dentro deste método, você verifica se o
-                                                                   // Transferable contém dados com o formato
-                                                                   // DataFlavor.stringFlavor. Se contiver, você
-                                                                   // chama deleteTask() para executar a
-                                                                   // lógica de exclusão da mensagem (ou tarefa)
-                                                                   // associada ao item arrastado. Se o formato não
-                                                                   // for suportado, o evento é rejeitado.
+                        Transferable tr = event.getTransferable();
+                        if (tr.isDataFlavorSupported(DataFlavor.stringFlavor)) {// Dentro deste método, você verifica se
+                                                                                // o
+                            // Transferable contém dados com o formato
+                            // DataFlavor.stringFlavor. Se contiver, você
+                            // chama deleteTask() para executar a
+                            // lógica de exclusão da mensagem (ou tarefa)
+                            // associada ao item arrastado. Se o formato não
+                            // for suportado, o evento é rejeitado.
                             deleteTask();
                             event.dropComplete(true);
                         } else {
@@ -262,7 +266,9 @@ public class TodoList extends JFrame {
         unmarkDoneButton.addMouseListener(unmarkClick);
         aboutButton.addMouseListener(abtClick);
     }
+    
 
+    ToDoListControl listControl = new ToDoListControl(tasks, listModel);
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // Criação de Handlers para receberem o eventos de MouseListener
@@ -420,6 +426,7 @@ public class TodoList extends JFrame {
             cont++;
             Task newTask = new Task(cont + ". " + taskDescription);
             tasks.add(newTask);
+            listControl.cadastrar(newTask.getDescription(), newTask.isDone());
             updateTaskList();
             taskInputField.setText("");
         } else {
@@ -509,8 +516,9 @@ public class TodoList extends JFrame {
     private void updateTaskList() {
         // Atualiza a lista de tasks exibida na GUI
         listModel.clear();
+        tasks = new ToDoListDAO().listarTodos();
         for (Task task : tasks) {
-            listModel.addElement(task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
+                listModel.addElement(task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
         }
     }
 

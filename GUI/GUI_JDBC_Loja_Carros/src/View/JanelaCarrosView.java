@@ -138,7 +138,6 @@ public class JanelaCarrosView extends JPanel {
 
                             if (ano > 1900 && ano <= anoAtual + 1) {
                                 operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(),
-
                                         carAnoField.getText(), carPlacaField.getText().toUpperCase(),
                                         carValorField.getText(),
                                         (String) vendidoComboBox.getSelectedItem());

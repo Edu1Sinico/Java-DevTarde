@@ -20,7 +20,6 @@ public class ToDoListControl {
 
     // Método para atualizar a tabela de exibição com dados do banco de dados
     private void atualizarTabela() {
-        listModel.clear(); // Limpa todas as linhas existentes na tabela
         tasks = new ToDoListDAO().listarTodos();
     }
 
@@ -35,15 +34,15 @@ public class ToDoListControl {
     }
 
     // Método para atualizar os dados de um carro no banco de dados
-    public void atualizar(int index, String tarefa, boolean conclusao) {
-        new ToDoListDAO().atualizar(index, tarefa, conclusao);
+    public void atualizar(int id, String tarefa, boolean conclusao) {
+        new ToDoListDAO().atualizar(id, tarefa, conclusao);
         // Chama o método de atualização no banco de dados
         atualizarTabela(); // Atualiza a tabela de exibição após a atualização
     }
 
     // Método para apagar um carro do banco de dados
-    public void apagar(int index) {
-        new ToDoListDAO().apagar(index);
+    public void apagar(int id) {
+        new ToDoListDAO().apagar(id);
         // Chama o método de exclusão no banco de dados
         atualizarTabela(); // Atualiza a tabela de exibição após a exclusão
     }

@@ -426,7 +426,7 @@ public class TodoList extends JFrame {
             cont++;
             Task newTask = new Task(cont + ". " + taskDescription);
             tasks.add(newTask);
-            listControl.cadastrar(newTask.getDescription(), newTask.isDone());
+            listControl.cadastrar(taskDescription, newTask.isDone());
             updateTaskList();
             taskInputField.setText("");
         } else {
@@ -445,17 +445,19 @@ public class TodoList extends JFrame {
             int selectedIndex = taskList.getSelectedIndex();
             if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
                 tasks.remove(selectedIndex);
+                listControl.apagar(selectedIndex+1);
+                System.out.print(selectedIndex);
                 updateTaskList();
-                if (!tasks.isEmpty()) {
-                    if (selectedIndex < tasks.size()) {
-                        for (int i = selectedIndex; i < tasks.size(); i++) {
-                            tasks.get(i).setDescription((i + 1) + ". " + tasks.get(i).getDescription().substring(3));
-                        }
-                    }
-                    cont = tasks.size(); // redefine o contador para o tamanho atual da lista
-                } else {
-                    cont = 0; // redefine o contador se a lista estiver vazia
-                }
+                // if (!tasks.isEmpty()) {
+                //     if (selectedIndex < tasks.size()) {
+                //         for (int i = selectedIndex; i < tasks.size(); i++) {
+                //             tasks.get(i).setDescription((i + 1) + ". " + tasks.get(i).getDescription().substring(3));
+                //         }
+                //     }
+                //     cont = tasks.size(); // redefine o contador para o tamanho atual da lista
+                // } else {
+                //     cont = 0; // redefine o contador se a lista estiver vazia
+                // }
             }
         }
     }

@@ -105,8 +105,9 @@ public class ToDoListDAO {
                 // registro
 
                 Task task = new Task(
-                        rs.getString("description"),
-                        rs.getBoolean("done"));
+                        // rs.getInt("id"),
+                        rs.getString("tarefa"),
+                        rs.getBoolean("conclusao"));
                 tasks.add(task); // Adiciona o objeto Carros à lista de carros
             }
         } catch (SQLException ex) {

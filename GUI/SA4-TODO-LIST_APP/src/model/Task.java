@@ -1,7 +1,11 @@
 package model;
+
+import java.util.List;
+
 public class Task {
 
     // Atributos 
+    int id;
     String description;
     boolean done;
 
@@ -30,4 +34,13 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 }

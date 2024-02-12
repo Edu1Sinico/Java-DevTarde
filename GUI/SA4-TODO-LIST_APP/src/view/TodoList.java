@@ -367,11 +367,8 @@ public class TodoList extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-
-            for (Task task : tasks) {
-                if (taskList.getSelectedIndex() >= 0)
+                if (taskList.getSelectedIndex() >= 0 && taskList.getSelectedIndex() < tasks.size())
                     unmarkTaskDone();
-            }
         }
 
         @Override
@@ -489,7 +486,7 @@ public class TodoList extends JFrame {
         if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
 
             for (Task task : tasks) {
-                String[] parts = selectedValue.split(task.getId() + ". ", 2);
+                String[] parts = selectedValue.split(task.getId() + ". ");
                 
                 if (parts.length > 1 && parts[1].equals(task.getDescription())) {
                     listControl.atualizar(task.getId(), task.getDescription(), true);
@@ -510,8 +507,8 @@ public class TodoList extends JFrame {
             if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
 
                 for (Task task : tasks) {
-                    String[] parts = selectedValue.split(task.getId() + ". ", 2);
-                    System.out.println(parts);
+                    String[] parts = selectedValue.split(task.getId() + ". ", 1);
+                    
                     if (parts.length > 1 && parts[1].equals(task.getDescription())) {
                         listControl.atualizar(task.getId(), task.getDescription(), false);
                         updateTaskList();

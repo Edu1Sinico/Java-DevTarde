@@ -191,6 +191,11 @@ public class TodoList extends JFrame {
         // Evento de WindowListener
         this.addWindowListener(new WindowAdapter() { // Adiciona o ouvinte para o JFrame
             @Override
+            public void windowOpened(WindowEvent e) {
+                updateTaskList();
+            }
+
+            @Override
             public void windowClosing(WindowEvent e) { // Cria o evento de fechar
                 close(); // Chama o método de fechar o programa
             }
@@ -266,7 +271,6 @@ public class TodoList extends JFrame {
         unmarkDoneButton.addMouseListener(unmarkClick);
         aboutButton.addMouseListener(abtClick);
     }
-    
 
     ToDoListControl listControl = new ToDoListControl(tasks, listModel);
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -365,7 +369,7 @@ public class TodoList extends JFrame {
         public void mouseClicked(MouseEvent e) {
 
             for (Task task : tasks) {
-                if (taskList.getSelectedIndex() >= 0 && task.isDone())
+                if (taskList.getSelectedIndex() >= 0)
                     unmarkTaskDone();
             }
         }
@@ -422,9 +426,16 @@ public class TodoList extends JFrame {
     private void addTask() {
         // Adiciona uma nova task à lista de tasks
         String taskDescription = taskInputField.getText().trim();// remove espaços vazios
+        Task newTask = new Task(taskDescription);
+
         if (!taskDescription.isEmpty()) {
             cont++;
-            Task newTask = new Task(cont + ". " + taskDescription);
+            tasks = new ToDoListDAO().listarTodos();
+
+            for (Task task : tasks) {
+                newTask = new Task(taskDescription);
+            }
+
             tasks.add(newTask);
             listControl.cadastrar(taskDescription, newTask.isDone());
             updateTaskList();
@@ -443,20 +454,28 @@ public class TodoList extends JFrame {
 
             // Exclui a task selecionada da lista de tasks
             int selectedIndex = taskList.getSelectedIndex();
+            String selectedValue = taskList.getSelectedValue();
             if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
                 tasks.remove(selectedIndex);
-                listControl.apagar(selectedIndex+1);
-                System.out.print(selectedIndex);
+                tasks = new ToDoListDAO().listarTodos();
+                for (Task task : tasks) {
+                    String[] parts = selectedValue.split(task.getId() + ". ");
+
+                    if (parts.length > 1 && parts[1].equals(task.getDescription())) {
+                        listControl.apagar(task.getId());
+                    }
+                }
                 updateTaskList();
                 // if (!tasks.isEmpty()) {
-                //     if (selectedIndex < tasks.size()) {
-                //         for (int i = selectedIndex; i < tasks.size(); i++) {
-                //             tasks.get(i).setDescription((i + 1) + ". " + tasks.get(i).getDescription().substring(3));
-                //         }
-                //     }
-                //     cont = tasks.size(); // redefine o contador para o tamanho atual da lista
+                // if (selectedIndex < tasks.size()) {
+                // for (int i = selectedIndex; i < tasks.size(); i++) {
+                // tasks.get(i).setDescription((i + 1) + ". " +
+                // tasks.get(i).getDescription().substring(3));
+                // }
+                // }
+                // cont = tasks.size(); // redefine o contador para o tamanho atual da lista
                 // } else {
-                //     cont = 0; // redefine o contador se a lista estiver vazia
+                // cont = 0; // redefine o contador se a lista estiver vazia
                 // }
             }
         }
@@ -466,10 +485,18 @@ public class TodoList extends JFrame {
     private void markTaskDone() {
         // Marca a task selecionada como concluída
         int selectedIndex = taskList.getSelectedIndex();
+        String selectedValue = taskList.getSelectedValue();
         if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
-            Task task = tasks.get(selectedIndex);
-            task.setDone(true);
-            updateTaskList();
+
+            for (Task task : tasks) {
+                String[] parts = selectedValue.split(task.getId() + ". ", 2);
+                
+                if (parts.length > 1 && parts[1].equals(task.getDescription())) {
+                    listControl.atualizar(task.getId(), task.getDescription(), true);
+                    System.out.println(task.isDone());
+                    updateTaskList();
+                }
+            }
         }
     }
 
@@ -479,10 +506,17 @@ public class TodoList extends JFrame {
                 "Desmarcando Tarefa...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // Desfaz a marcação da task selecionada
             int selectedIndex = taskList.getSelectedIndex();
+            String selectedValue = taskList.getSelectedValue();
             if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
-                Task task = tasks.get(selectedIndex);
-                task.setDone(false);
-                updateTaskList();
+
+                for (Task task : tasks) {
+                    String[] parts = selectedValue.split(task.getId() + ". ", 2);
+                    System.out.println(parts);
+                    if (parts.length > 1 && parts[1].equals(task.getDescription())) {
+                        listControl.atualizar(task.getId(), task.getDescription(), false);
+                        updateTaskList();
+                    }
+                }
             }
         }
     }
@@ -520,7 +554,7 @@ public class TodoList extends JFrame {
         listModel.clear();
         tasks = new ToDoListDAO().listarTodos();
         for (Task task : tasks) {
-                listModel.addElement(task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
+            listModel.addElement(task.getId() + ". " + task.getDescription() + (task.isDone() ? " (Concluída)" : ""));
         }
     }
 

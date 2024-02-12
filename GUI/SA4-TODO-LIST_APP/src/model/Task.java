@@ -10,13 +10,15 @@ public class Task {
     boolean done;
 
     // Construtor
-    public Task(String description, boolean b) {
+
+    public Task(String description){
         this.description = description;
-        this.done = false;
     }
 
-    public Task(String description) {
+    public Task(int id, String description, boolean done) {
+        this.id = id;
         this.description = description;
+        this.done = done;
     }
 
     public String getDescription() {

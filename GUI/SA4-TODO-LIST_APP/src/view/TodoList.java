@@ -367,8 +367,18 @@ public class TodoList extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-                if (taskList.getSelectedIndex() >= 0 && taskList.getSelectedIndex() < tasks.size())
-                    unmarkTaskDone();
+            int selectedIndex = taskList.getSelectedIndex();
+            String selectedValue = taskList.getSelectedValue();
+            if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
+
+                for (Task task : tasks) {
+                    String[] parts = selectedValue.split(" ");
+
+                    if (parts[1].equals(task.getDescription())) {
+                        unmarkTaskDone();
+                    }
+                }
+            }
         }
 
         @Override
@@ -456,9 +466,9 @@ public class TodoList extends JFrame {
                 tasks.remove(selectedIndex);
                 tasks = new ToDoListDAO().listarTodos();
                 for (Task task : tasks) {
-                    String[] parts = selectedValue.split(task.getId() + ". ");
+                    String[] parts = selectedValue.split(" ");
 
-                    if (parts.length > 1 && parts[1].equals(task.getDescription())) {
+                    if (parts[1].equals(task.getDescription())) {
                         listControl.apagar(task.getId());
                     }
                 }
@@ -486,9 +496,9 @@ public class TodoList extends JFrame {
         if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
 
             for (Task task : tasks) {
-                String[] parts = selectedValue.split(task.getId() + ". ");
-                
-                if (parts.length > 1 && parts[1].equals(task.getDescription())) {
+                String[] parts = selectedValue.split(" ");
+
+                if (parts[1].equals(task.getDescription())) {
                     listControl.atualizar(task.getId(), task.getDescription(), true);
                     System.out.println(task.isDone());
                     updateTaskList();
@@ -507,9 +517,9 @@ public class TodoList extends JFrame {
             if (selectedIndex >= 0 && selectedIndex < tasks.size()) {
 
                 for (Task task : tasks) {
-                    String[] parts = selectedValue.split(task.getId() + ". ", 1);
-                    
-                    if (parts.length > 1 && parts[1].equals(task.getDescription())) {
+                    String[] parts = selectedValue.split(" ");
+
+                    if (parts[1].equals(task.getDescription())) {
                         listControl.atualizar(task.getId(), task.getDescription(), false);
                         updateTaskList();
                     }
@@ -535,13 +545,14 @@ public class TodoList extends JFrame {
     // Método de Limpar Tarefas Concluídas
     private void clearCompletedTasks() {
         // Limpa todas as tasks concluídas da lista
-        List<Task> completedTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.isDone()) {
-                completedTasks.add(task);
+                if (JOptionPane.showConfirmDialog(null, "Deseja apagar todas as tarefas concluídas?",
+                        "Remover Tarefas Concluídas...", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    listControl.apagar(task.getId());
+                }
             }
         }
-        tasks.removeAll(completedTasks);
         updateTaskList();
     }
 
